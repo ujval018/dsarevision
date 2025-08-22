@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Revision Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        .topic-card {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .topic-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+        .topic-card p {
+            color: #475569;
+            flex-grow: 1;
+            margin-top: 0.75rem;
+        }
+        .topic-card a.go-to-notes {
+            margin-top: 1.5rem;
+            display: inline-block;
+            background-color: #1e293b;
+            color: #ffffff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            text-align: center;
+            font-weight: 500;
+        }
+        .topic-card a.go-to-notes:hover {
+            background-color: #334155;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-slate-800 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-2xl font-bold text-white hover:text-slate-200 transition">DSA Revision Hub</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-2">
+                        <a href="array.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Arrays</a>
+                        <a href="string.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Strings</a>
+                        <a href="ll.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Linked List</a>
+                        <a href="stack.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Stack</a>
+                        <a href="queue_deque.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Queue/Deque</a>
+                        <a href="tree.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Tree</a>
+                        <a href="heap.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Heap</a>
+                        <a href="hashing.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Hashing</a>
+                        <a href="sorting.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sorting</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto max-w-6xl p-4 sm:p-6 lg:p-8 pt-24">
+        <header class="text-center my-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-slate-900">Welcome to the DSA Revision Hub</h1>
+            <p class="text-lg text-gray-600 mt-4">Your one-stop destination for comprehensive DSA notes. Select a topic to begin.</p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="topic-card">
+                <div><h3>🔲 Arrays & Vectors</h3><p>Fundamentals, core patterns like Two Pointers and Sliding Window, and classic problems.</p></div>
+                <a href="array.html" class="go-to-notes">View Notes</a>
+            </div>
+            <div class="topic-card">
+                <div><h3>📜 Strings</h3><p>C++ std::string, anagrams, palindromes, and advanced pattern matching like KMP.</p></div>
+                <a href="string.html" class="go-to-notes">View Notes</a>
+            </div>
+            <div class="topic-card">
+                <div><h3>🔗 Linked Lists</h3><p>Singly, Doubly, and Circular lists. Algorithms like Tortoise & Hare and reversing in groups.</p></div>
+                <a href="ll.html" class="go-to-notes">View Notes</a>
+            </div>
+            <div class="topic-card">
+                <div><h3>📚 Stacks</h3><p>LIFO principle, implementations, and monotonic stack applications like NGE and Stock Span.</p></div>
+                <a href="stack.html" class="go-to-notes">View Notes</a>
+            </div>
+            <div class="topic-card">
+                <div><h3>↔️ Queues & Deques</h3><p>FIFO principle, circular arrays, and problems like Sliding Window Maximum.</p></div>
+                <a href="queue_deque.html" class="go-to-notes">View Notes</a>
+            </div>
+            <div class="topic-card">
+                <div><h3>🌳 Trees & BST</h3><p>Traversals (BFS, DFS), properties, BST operations, and advanced concepts like LCA.</p></div>
+                <a href="tree.html" class="go-to-notes">View Notes</a>
+            </div>
+            <div class="topic-card">
+                <div><h3>🔥 Heaps</h3><p>Min/Max heaps, custom implementations, Heap Sort, and priority queue applications.</p></div>
+                <a href="heap.html" class="go-to-notes">View Notes</a>
+            </div>
+            <div class="topic-card">
+                <div><h3>🔑 Hashing</h3><p>Collision resolution, chaining, open addressing, and common problems with `unordered_map`.</p></div>
+                <a href="hashing.html" class="go-to-notes">View Notes</a>
+            </div>
+            <div class="topic-card">
+                <div><h3>📊 Sorting</h3><p>In-depth review of major sorting algorithms like Quick Sort, Merge Sort, and Heap Sort.</p></div>
+                <a href="sorting.html" class="go-to-notes">View Notes</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

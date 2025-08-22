@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Notes: Hashing (A-Z Revision)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        h1, h2, h3 {
+            font-weight: 700;
+            color: #0f172a;
+        }
+        h1 {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+        h2 {
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            margin-top: 2.5rem;
+        }
+        h3 {
+            margin-top: 1.5rem;
+            font-weight: 600;
+        }
+        pre[class*="language-"] {
+            font-family: 'Fira Code', monospace;
+            border-radius: 0.5rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05);
+        }
+        code[class*="language-"] {
+            font-family: 'Fira Code', monospace;
+        }
+        .flashcard {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-top: 1rem;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05);
+        }
+        .flashcard-q {
+            font-weight: 600;
+            color: #475569;
+        }
+        .flashcard-a {
+            margin-top: 0.5rem;
+            color: #334155;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        hr {
+            border-color: #cbd5e1;
+            margin-top: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+        .approach-note {
+            margin-top: 0.5rem;
+            margin-bottom: 0.75rem;
+            font-style: italic;
+            color: #475569;
+            border-left: 3px solid #94a3b8;
+            padding-left: 0.75rem;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="bg-slate-800 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-2xl font-bold text-white hover:text-slate-200 transition">DSA Revision Hub</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-2">
+                        <a href="array.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Arrays</a>
+                        <a href="string.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Strings</a>
+                        <a href="ll.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Linked List</a>
+                        <a href="stack.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Stack</a>
+                        <a href="queue_deque.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Queue/Deque</a>
+                        <a href="tree.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Tree</a>
+                        <a href="heap.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Heap</a>
+                        <a href="hashing.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Hashing</a>
+                        <a href="sorting.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sorting</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container pt-24">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl md:text-5xl font-bold">🔑 Hashing: The Complete A-Z Guide</h1>
+        </header>
+
+        <main>
+            <!-- Section 1: Fundamentals -->
+            <section>
+                <h2 class="text-3xl">1. Hashing Fundamentals</h2>
+                <h3>Concept</h3>
+                <p class="approach-note">Hashing is a technique used to map keys of any type to a fixed-size array, known as a <strong>hash table</strong>. A <strong>hash function</strong> computes an index from the key, allowing for average-case <strong>O(1)</strong> time complexity for search, insert, and delete operations. The main challenge is handling <strong>collisions</strong>, which occur when two different keys map to the same index.</p>
+                <ul class="list-disc list-inside mt-2 space-y-1 pl-2">
+                    <li><strong>Hash Function:</strong> Maps a key to an integer index. A good hash function distributes keys uniformly.</li>
+                    <li><strong>Hash Table:</strong> An array that stores pointers to the data corresponding to a given key.</li>
+                    <li><strong>Collision:</strong> When `hash(key1) == hash(key2)` for `key1 != key2`.</li>
+                    <li><strong>Load Factor (α):</strong> `(Number of keys) / (Size of hash table)`. Performance degrades as α increases.</li>
+                </ul>
+            </section>
+
+            <hr>
+
+            <!-- Section 2: Collision Resolution Techniques -->
+            <section>
+                <h2 class="text-3xl">2. Collision Resolution Techniques</h2>
+                
+                <h3>Chaining</h3>
+                <p class="approach-note">In chaining, each slot in the hash table is a pointer to a linked list (or another data structure). All keys that hash to the same index are stored in the list at that index. This is the most common method and is used by C++ `std::unordered_map`.</p>
+<pre><code class="language-cpp">
+#include &lt;list&gt;
+class ChainingHash {
+    int BUCKET;
+    list&lt;int&gt; *table;
+public:
+    ChainingHash(int b) {
+        BUCKET = b;
+        table = new list&lt;int&gt;[b];
+    }
+    void insert(int key) {
+        int i = key % BUCKET;
+        table[i].push_back(key);
+    }
+    bool search(int key) {
+        int i = key % BUCKET;
+        for (int x : table[i]) {
+            if (x == key) return true;
+        }
+        return false;
+    }
+    void remove(int key) {
+        int i = key % BUCKET;
+        table[i].remove(key);
+    }
+};
+</code></pre>
+
+                <h3>Open Addressing (Linear Probing)</h3>
+                <p class="approach-note">In open addressing, all elements are stored within the hash table itself. If a collision occurs, we "probe" for the next available slot. In linear probing, we check the next slot sequentially (`hash(key) + 1`, `hash(key) + 2`, etc.) until an empty slot is found.</p>
+<pre><code class="language-cpp">
+class LinearProbingHash {
+    int *arr;
+    int cap, size;
+public:
+    LinearProbingHash(int c) {
+        cap = c;
+        size = 0;
+        arr = new int[cap];
+        for (int i = 0; i < cap; i++) arr[i] = -1; // -1 indicates empty
+    }
+    int hash(int key) { return key % cap; }
+
+    bool insert(int key) {
+        if (size == cap) return false;
+        int i = hash(key);
+        while (arr[i] != -1 && arr[i] != -2 && arr[i] != key) {
+            i = (i + 1) % cap;
+        }
+        if (arr[i] == key) return false; // Already present
+        else {
+            arr[i] = key;
+            size++;
+            return true;
+        }
+    }
+    // Note: Deletion requires marking slots as "deleted" (e.g., with -2)
+    // to avoid breaking the probe chain for subsequent searches.
+};
+</code></pre>
+            </section>
+
+            <hr>
+
+            <!-- Section 3: Classic Problems -->
+            <section>
+                <h2 class="text-3xl">3. Classic Problems & Applications</h2>
+                <p class="approach-note">In C++, we typically use the built-in `std::unordered_map` (for key-value pairs) and `std::unordered_set` (for unique keys), which are implemented using chaining and provide average O(1) performance.</p>
+
+                <h3>Count Distinct Elements</h3>
+<pre><code class="language-cpp">
+#include &lt;unordered_set&gt;
+int countDistinct(const vector<int>& arr) {
+    unordered_set&lt;int&gt; s(arr.begin(), arr.end());
+    return s.size();
+}
+</code></pre>
+
+                <h3>Frequencies of Array Elements</h3>
+<pre><code class="language-cpp">
+#include &lt;unordered_map&gt;
+void printFrequencies(const vector<int>& arr) {
+    unordered_map&lt;int, int&gt; freq;
+    for (int x : arr) {
+        freq[x]++;
+    }
+    for (auto const& [key, val] : freq) {
+        cout << key << ": " << val << endl;
+    }
+}
+</code></pre>
+
+                <h3>Intersection of Two Unsorted Arrays</h3>
+<pre><code class="language-cpp">
+vector<int> intersection(const vector<int>& a, const vector<int>& b) {
+    unordered_set&lt;int&gt; s(a.begin(), a.end());
+    vector<int> result;
+    for (int x : b) {
+        if (s.count(x)) {
+            result.push_back(x);
+            s.erase(x); // Avoid adding duplicates if b has them
+        }
+    }
+    return result;
+}
+</code></pre>
+
+                <h3>Pair with a Given Sum in an Unsorted Array</h3>
+<pre><code class="language-cpp">
+bool hasPairWithSum(const vector<int>& arr, int sum) {
+    unordered_set&lt;int&gt; s;
+    for (int x : arr) {
+        if (s.count(sum - x)) {
+            return true;
+        }
+        s.insert(x);
+    }
+    return false;
+}
+</code></pre>
+
+                <h3>Longest Subarray with Zero Sum</h3>
+<pre><code class="language-cpp">
+int longestZeroSumSubarray(const vector<int>& arr) {
+    unordered_map&lt;int, int&gt; prefix_sum_map;
+    int prefix_sum = 0;
+    int max_len = 0;
+    for (int i = 0; i < arr.size(); i++) {
+        prefix_sum += arr[i];
+        if (prefix_sum == 0) {
+            max_len = i + 1;
+        }
+        if (prefix_sum_map.count(prefix_sum)) {
+            max_len = max(max_len, i - prefix_sum_map[prefix_sum]);
+        } else {
+            prefix_sum_map[prefix_sum] = i;
+        }
+    }
+    return max_len;
+}
+</code></pre>
+            </section>
+
+            <hr>
+
+            <!-- Master Flashcards -->
+            <section>
+                <h2 class="text-3xl">🃏 Master Flashcards for Hashing</h2>
+                <div class="flashcard">
+                    <p class="flashcard-q">Q: What is a collision in hashing?</p>
+                    <p class="flashcard-a">A: When two different keys produce the same hash index.</p>
+                </div>
+                <div class="flashcard">
+                    <p class="flashcard-q">Q: What are the two main methods for collision resolution?</p>
+                    <p class="flashcard-a">A: 1. Chaining (each slot is a list) and 2. Open Addressing (probe for the next empty slot).</p>
+                </div>
+                <div class="flashcard">
+                    <p class="flashcard-q">Q: What is the average time complexity for search, insert, and delete in a well-designed hash table?</p>
+                    <p class="flashcard-a">A: O(1).</p>
+                </div>
+                <div class="flashcard">
+                    <p class="flashcard-q">Q: What is the worst-case time complexity for these operations?</p>
+                    <p class="flashcard-a">A: O(n), which occurs if all keys hash to the same index, degrading performance to that of a linked list.</p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center mt-16 border-t pt-8">
+            <p class="text-slate-500">✅ Revision pack complete: Fundamentals, Implementations, and Classic Problems.</p>
+        </footer>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

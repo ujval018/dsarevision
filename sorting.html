@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Revision Notes: Sorting Algorithms</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Fira+Code&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+        h1, h2, h3 {
+            font-weight: 700;
+        }
+        .concept-icon {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+        .flashcard {
+            background-color: #fff;
+            border-left: 4px solid #007bff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        pre {
+            font-family: 'Fira Code', monospace;
+            background-color: #282c34;
+            color: #abb2bf;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        .token.keyword { color: #c678dd; }
+        .token.function { color: #61afef; }
+        .token.comment { color: #5c6370; }
+        .token.string { color: #98c379; }
+        .token.number { color: #d19a66; }
+        .token.operator { color: #56b6c2; }
+        .token.punctuation { color: #abb2bf; }
+        .token.type { color: #e5c07b; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <nav class="bg-slate-800 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-2xl font-bold text-white hover:text-slate-200 transition">DSA Revision Hub</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-2">
+                        <a href="array.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Arrays</a>
+                        <a href="string.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Strings</a>
+                        <a href="ll.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Linked List</a>
+                        <a href="stack.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Stack</a>
+                        <a href="queue_deque.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Queue/Deque</a>
+                        <a href="tree.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Tree</a>
+                        <a href="heap.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Heap</a>
+                        <a href="hashing.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Hashing</a>
+                        <a href="sorting.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sorting</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 sm:px-6 md:px-8 pt-24 pb-8 max-w-4xl">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900">DSA Revision Notes</h1>
+            <p class="text-lg text-gray-600 mt-2">A Comprehensive Guide to Sorting Algorithms</p>
+        </header>
+
+        <main>
+            <!-- Sorting Algorithms Section -->
+            <section id="sorting-algorithms" class="mb-16">
+                <h2 class="text-3xl font-bold border-b-2 border-blue-500 pb-2 mb-8">📝 Sorting Algorithms</h2>
+
+                <!-- 1. Selection Sort -->
+                <article class="mb-12">
+                    <h3 class="text-2xl font-semibold mb-4">1️⃣ Selection Sort</h3>
+                    <div class="space-y-6">
+                        <p><span class="concept-icon">🔑</span><strong class="font-semibold">Concept:</strong> Find the minimum element in the unsorted part of the array and swap it with the element at the beginning of the unsorted part. Repeat this process until the entire array is sorted.</p>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-2">💻 Code</h4>
+                            <pre><code class="language-cpp"><span class="token-keyword">void</span> <span class="token-function">selectionSort</span><span class="token-punctuation">(</span><span class="token-type">int</span> arr<span class="token-punctuation">[</span><span class="token-punctuation">]</span><span class="token-punctuation">,</span> <span class="token-type">int</span> n<span class="token-punctuation">)</span><span class="token-punctuation">{</span>
+    <span class="token-keyword">for</span><span class="token-punctuation">(</span><span class="token-type">int</span> i <span class="token-operator">=</span> <span class="token-number">0</span><span class="token-punctuation">;</span> i <span class="token-operator">&lt;</span> n <span class="token-operator">-</span> <span class="token-number">1</span><span class="token-punctuation">;</span> i<span class="token-operator">++</span><span class="token-punctuation">)</span><span class="token-punctuation">{</span>
+        <span class="token-type">int</span> min_ind <span class="token-operator">=</span> i<span class="token-punctuation">;</span>
+        <span class="token-keyword">for</span><span class="token-punctuation">(</span><span class="token-type">int</span> j <span class="token-operator">=</span> i <span class="token-operator">+</span> <span class="token-number">1</span><span class="token-punctuation">;</span> j <span class="token-operator">&lt;</span> n<span class="token-punctuation">;</span> j<span class="token-operator">++</span><span class="token-punctuation">)</span><span class="token-punctuation">{</span>
+            <span class="token-keyword">if</span><span class="token-punctuation">(</span>arr<span class="token-punctuation">[</span>j<span class="token-punctuation">]</span> <span class="token-operator">&lt;</span> arr<span class="token-punctuation">[</span>min_ind<span class="token-punctuation">]</span><span class="token-punctuation">)</span> min_ind <span class="token-operator">=</span> j<span class="token-punctuation">;</span>
+        <span class="token-punctuation">}</span>
+        <span class="token-function">swap</span><span class="token-punctuation">(</span>arr<span class="token-punctuation">[</span>min_ind<span class="token-punctuation">]</span><span class="token-punctuation">,</span> arr<span class="token-punctuation">[</span>i<span class="token-punctuation">]</span><span class="token-punctuation">)</span><span class="token-punctuation">;</span>
+    <span class="token-punctuation">}</span>
+<span class="token-punctuation">}</span></code></pre>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-2">🔄 Dry Run (arr = [29, 10, 14, 37])</h4>
+                            <ul class="list-disc list-inside bg-white p-4 rounded-lg shadow-sm">
+                                <li><strong>Pass 1:</strong> min=10 → [10, 29, 14, 37]</li>
+                                <li><strong>Pass 2:</strong> min=14 → [10, 14, 29, 37]</li>
+                                <li><strong>Pass 3:</strong> min=29 → [10, 14, 29, 37]</li>
+                            </ul>
+                        </div>
+                        <div class="flashcard p-4 rounded-lg">
+                            <h4 class="text-lg font-semibold mb-2">🃏 Flashcards</h4>
+                            <p><strong>Q:</strong> Time complexity of Selection Sort?</p>
+                            <p><strong>A:</strong> O(n²) (always, even if sorted).</p>
+                            <p class="mt-2"><strong>Q:</strong> Is Selection Sort stable?</p>
+                            <p><strong>A:</strong> ❌ No.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 2. Quick Sort -->
+                <article class="mb-12">
+                    <h3 class="text-2xl font-semibold mb-4">2️⃣ Quick Sort (Hoare Partition)</h3>
+                    <div class="space-y-6">
+                        <p><span class="concept-icon">🔑</span><strong class="font-semibold">Concept:</strong> Choose a 'pivot' element. Partition the array such that all elements smaller than the pivot come before it, and all elements greater come after. Recursively apply this to the sub-arrays.</p>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-2">💻 Code</h4>
+                            <pre><code class="language-cpp"><span class="token-type">int</span> <span class="token-function">partition</span><span class="token-punctuation">(</span><span class="token-type">int</span> a<span class="token-punctuation">[</span><span class="token-punctuation">]</span><span class="token-punctuation">,</span> <span class="token-type">int</span> low<span class="token-punctuation">,</span> <span class="token-type">int</span> high<span class="token-punctuation">)</span><span class="token-punctuation">{</span>
+    <span class="token-type">int</span> pivot <span class="token-operator">=</span> a<span class="token-punctuation">[</span>low<span class="token-punctuation">]</span><span class="token-punctuation">,</span> i <span class="token-operator">=</span> low <span class="token-operator">-</span> <span class="token-number">1</span><span class="token-punctuation">,</span> j <span class="token-operator">=</span> high <span class="token-operator">+</span> <span class="token-number">1</span><span class="token-punctuation">;</span>
+    <span class="token-keyword">while</span><span class="token-punctuation">(</span><span class="token-keyword">true</span><span class="token-punctuation">)</span><span class="token-punctuation">{</span>
+        <span class="token-keyword">do</span><span class="token-punctuation">{</span> i<span class="token-operator">++</span><span class="token-punctuation">;</span> <span class="token-punctuation">}</span><span class="token-keyword">while</span><span class="token-punctuation">(</span>a<span class="token-punctuation">[</span>i<span class="token-punctuation">]</span> <span class="token-operator">&lt;</span> pivot<span class="token-punctuation">)</span><span class="token-punctuation">;</span>
+        <span class="token-keyword">do</span><span class="token-punctuation">{</span> j<span class="token-operator">--</span><span class="token-punctuation">;</span> <span class="token-punctuation">}</span><span class="token-keyword">while</span><span class="token-punctuation">(</span>a<span class="token-punctuation">[</span>j<span class="token-punctuation">]</span> <span class="token-operator">&gt;</span> pivot<span class="token-punctuation">)</span><span class="token-punctuation">;</span>
+        <span class="token-keyword">if</span><span class="token-punctuation">(</span>i <span class="token-operator">&gt;=</span> j<span class="token-punctuation">)</span> <span class="token-keyword">return</span> j<span class="token-punctuation">;</span>
+        <span class="token-function">swap</span><span class="token-punctuation">(</span>a<span class="token-punctuation">[</span>i<span class="token-punctuation">]</span><span class="token-punctuation">,</span> a<span class="token-punctuation">[</span>j<span class="token-punctuation">]</span><span class="token-punctuation">)</span><span class="token-punctuation">;</span>
+    <span class="token-punctuation">}</span>
+<span class="token-punctuation">}</span>
+
+<span class="token-keyword">void</span> <span class="token-function">quickSort</span><span class="token-punctuation">(</span><span class="token-type">int</span> a<span class="token-punctuation">[</span><span class="token-punctuation">]</span><span class="token-punctuation">,</span> <span class="token-type">int</span> low<span class="token-punctuation">,</span> <span class="token-type">int</span> high<span class="token-punctuation">)</span><span class="token-punctuation">{</span>
+    <span class="token-keyword">if</span><span class="token-punctuation">(</span>low <span class="token-operator">&lt;</span> high<span class="token-punctuation">)</span><span class="token-punctuation">{</span>
+        <span class="token-type">int</span> p <span class="token-operator">=</span> <span class="token-function">partition</span><span class="token-punctuation">(</span>a<span class="token-punctuation">,</span> low<span class="token-punctuation">,</span> high<span class="token-punctuation">)</span><span class="token-punctuation">;</span>
+        <span class="token-function">quickSort</span><span class="token-punctuation">(</span>a<span class="token-punctuation">,</span> low<span class="token-punctuation">,</span> p<span class="token-punctuation">)</span><span class="token-punctuation">;</span>
+        <span class="token-function">quickSort</span><span class="token-punctuation">(</span>a<span class="token-punctuation">,</span> p <span class="token-operator">+</span> <span class="token-number">1</span><span class="token-punctuation">,</span> high<span class="token-punctuation">)</span><span class="token-punctuation">;</span>
+    <span class="token-punctuation">}</span>
+<span class="token-punctuation">}</span></code></pre>
+                        </div>
+                        <div class="flashcard p-4 rounded-lg">
+                            <h4 class="text-lg font-semibold mb-2">🃏 Flashcards</h4>
+                            <p><strong>Q:</strong> Average time complexity of Quick Sort?</p>
+                            <p><strong>A:</strong> O(n log n).</p>
+                            <p class="mt-2"><strong>Q:</strong> Worst-case?</p>
+                            <p><strong>A:</strong> O(n²) (when the pivot is always the smallest or largest element).</p>
+                            <p class="mt-2"><strong>Q:</strong> Is Quick Sort stable?</p>
+                            <p><strong>A:</strong> ❌ No.</p>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- 3. Merge Sort -->
+                <article class="mb-12">
+                    <h3 class="text-2xl font-semibold mb-4">3️⃣ Merge Sort</h3>
+                    <div class="space-y-6">
+                        <p><span class="concept-icon">🔑</span><strong class="font-semibold">Concept:</strong> A "divide and conquer" algorithm. It divides the array into two halves, recursively sorts them, and then merges the two sorted halves back together.</p>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-2">💻 Code</h4>
+                            <pre><code class="language-cpp"><span class="token-keyword">void</span> <span class="token-function">merge</span><span class="token-punctuation">(</span><span class="token-type">int</span> arr<span class="token-punctuation">[</span><span class="token-punctuation">]</span><span class="token-punctuation">,</span> <span class="token-type">int</span> l<span class="token-punctuation">,</span> <span class="token-type">int</span> m<span class="token-punctuation">,</span> <span class="token-type">int</span> r<span class="token-punctuation">)</span><span class="token-punctuation">{</span>
+    <span class="token-type">int</span> n1 <span class="token-operator">=</span> m <span class="token-operator">-</span> l <span class="token-operator">+</span> <span class="token-number">1</span><span class="token-punctuation">,</span> n2 <span class="token-operator">=</span> r <span class="token-operator">-</span> m<span class="token-punctuation">;</span>
+    <span class="token-type">int</span> L<span class="token-punctuation">[</span>n1<span class="token-punctuation">]</span><span class="token-punctuation">,</span> R<span class="token-punctuation">[</span>n2<span class="token-punctuation">]</span><span class="token-punctuation">;</span>
+    <span class="token-keyword">for</span><span class="token-punctuation">(</span><span class="token-type">int</span> i <span class="token-operator">=</span> <span class="token-number">0</span><span class="token-punctuation">;</span> i <span class="token-operator">&lt;</span> n1<span class="token-punctuation">;</span> i<span class="token-operator">++</span><span class="token-punctuation">)</span> L<span class="token-punctuation">[</span>i<span class="token-punctuation">]</span> <span class="token-operator">=</span> arr<span class="token-punctuation">[</span>l <span class="token-operator">+</span> i<span class="token-punctuation">]</span><span class="token-punctuation">;</span>
+    <span class="token-keyword">for</span><span class="token-punctuation">(</span><span class="token-type">int</span> j <span class="token-operator">=</span> <span class="token-number">0</span><span class="token-punctuation">;</span> j <span class="token-operator">&lt;</span> n2<span class="token-punctuation">;</span> j<span class="token-operator">++</span><span class="token-punctuation">)</span> R<span class="token-punctuation">[</span>j<span class="token-punctuation">]</span> <span class="token-operator">=</span> arr<span class="token-punctuation">[</span>m <span class="token-operator">+</span> <span class="token-number">1</span> <span class="token-operator">+</span> j<span class="token-punctuation">]</span><span class="token-punctuation">;</span>
+    <span class="token-type">int</span> i <span class="token-operator">=</span> <span class="token-number">0</span><span class="token-punctuation">,</span> j <span class="token-operator">=</span> <span class="token-number">0</span><span class="token-punctuation">,</span> k <span class="token-operator">=</span> l<span class="token-punctuation">;</span>
+    <span class="token-keyword">while</span><span class="token-punctuation">(</span>i <span class="token-operator">&lt;</span> n1 <span class="token-operator">&amp;&amp;</span> j <span class="token-operator">&lt;</span> n2<span class="token-punctuation">)</span><span class="token-punctuation">{</span>
+        <span class="token-keyword">if</span><span class="token-punctuation">(</span>L<span class="token-punctuation">[</span>i<span class="token-punctuation">]</span> <span class="token-operator">&lt;=</span> R<span class="token-punctuation">[</span>j<span class="token-punctuation">]</span><span class="token-punctuation">)</span> arr<span class="token-punctuation">[</span>k<span class="token-operator">++</span><span class="token-punctuation">]</span> <span class="token-operator">=</span> L<span class="token-punctuation">[</span>i<span class="token-operator">++</span><span class="token-punctuation">]</span><span class="token-punctuation">;</span>
+        <span class="token-keyword">else</span> arr<span class="token-punctuation">[</span>k<span class="token-operator">++</span><span class="token-punctuation">]</span> <span class="token-operator">=</span> R<span class="token-punctuation">[</span>j<span class="token-operator">++</span><span class="token-punctuation">]</span><span class="token-punctuation">;</span>
+    <span class="token-punctuation">}</span>
+    <span class="token-keyword">while</span><span class="token-punctuation">(</span>i <span class="token-operator">&lt;</span> n1<span class="token-punctuation">)</span> arr<span class="token-punctuation">[</span>k<span class="token-operator">++</span><span class="token-punctuation">]</span> <span class="token-operator">=</span> L<span class="token-punctuation">[</span>i<span class="token-operator">++</span><span class="token-punctuation">]</span><span class="token-punctuation">;</span>
+    <span class="token-keyword">while</span><span class="token-punctuation">(</span>j <span class="token-operator">&lt;</span> n2<span class="token-punctuation">)</span> arr<span class="token-punctuation">[</span>k<span class="token-operator">++</span><span class="token-punctuation">]</span> <span class="token-operator">=</span> R<span class="token-punctuation">[</span>j<span class="token-operator">++</span><span class="token-punctuation">]</span><span class="token-punctuation">;</span>
+<span class="token-punctuation">}</span>
+
+<span class="token-keyword">void</span> <span class="token-function">mergeSort</span><span class="token-punctuation">(</span><span class="token-type">int</span> arr<span class="token-punctuation">[</span><span class="token-punctuation">]</span><span class="token-punctuation">,</span> <span class="token-type">int</span> l<span class="token-punctuation">,</span> <span class="token-type">int</span> r<span class="token-punctuation">)</span><span class="token-punctuation">{</span>
+    <span class="token-keyword">if</span><span class="token-punctuation">(</span>l <span class="token-operator">&lt;</span> r<span class="token-punctuation">)</span><span class="token-punctuation">{</span>
+        <span class="token-type">int</span> m <span class="token-operator">=</span> l <span class="token-operator">+</span> <span class="token-punctuation">(</span>r <span class="token-operator">-</span> l<span class="token-punctuation">)</span> <span class="token-operator">/</span> <span class="token-number">2</span><span class="token-punctuation">;</span> <span class="token-comment">// Avoids overflow for large l, r</span>
+        <span class="token-function">mergeSort</span><span class="token-punctuation">(</span>arr<span class="token-punctuation">,</span> l<span class="token-punctuation">,</span> m<span class="token-punctuation">)</span><span class="token-punctuation">;</span>
+        <span class="token-function">mergeSort</span><span class="token-punctuation">(</span>arr<span class="token-punctuation">,</span> m <span class="token-operator">+</span> <span class="token-number">1</span><span class="token-punctuation">,</span> r<span class="token-punctuation">)</span><span class="token-punctuation">;</span>
+        <span class="token-function">merge</span><span class="token-punctuation">(</span>arr<span class="token-punctuation">,</span> l<span class="token-punctuation">,</span> m<span class="token-punctuation">,</span> r<span class="token-punctuation">)</span><span class="token-punctuation">;</span>
+    <span class="token-punctuation">}</span>
+<span class="token-punctuation">}</span></code></pre>
+                        </div>
+                        <div class="flashcard p-4 rounded-lg">
+                            <h4 class="text-lg font-semibold mb-2">🃏 Flashcards</h4>
+                            <p><strong>Q:</strong> Time complexity of Merge Sort?</p>
+                            <p><strong>A:</strong> O(n log n) (always).</p>
+                            <p class="mt-2"><strong>Q:</strong> Space complexity?</p>
+                            <p><strong>A:</strong> O(n).</p>
+                            <p class="mt-2"><strong>Q:</strong> Is Merge Sort stable?</p>
+                            <p><strong>A:</strong> ✅ Yes.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 4. Insertion Sort -->
+                <article class="mb-12">
+                    <h3 class="text-2xl font-semibold mb-4">4️⃣ Insertion Sort</h3>
+                    <div class="space-y-6">
+                        <p><span class="concept-icon">🔑</span><strong class="font-semibold">Concept:</strong> It builds the final sorted array one item at a time. It iterates through the input elements and inserts each element into its correct position in the sorted part of the array.</p>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-2">💻 Code</h4>
+                            <pre><code class="language-cpp"><span class="token-keyword">void</span> <span class="token-function">insertionSort</span><span class="token-punctuation">(</span><span class="token-type">int</span> arr<span class="token-punctuation">[</span><span class="token-punctuation">]</span><span class="token-punctuation">,</span> <span class="token-type">int</span> n<span class="token-punctuation">)</span><span class="token-punctuation">{</span>
+    <span class="token-keyword">for</span><span class="token-punctuation">(</span><span class="token-type">int</span> i <span class="token-operator">=</span> <span class="token-number">1</span><span class="token-punctuation">;</span> i <span class="token-operator">&lt;</span> n<span class="token-punctuation">;</span> i<span class="token-operator">++</span><span class="token-punctuation">)</span><span class="token-punctuation">{</span>
+        <span class="token-type">int</span> key <span class="token-operator">=</span> arr<span class="token-punctuation">[</span>i<span class="token-punctuation">]</span><span class="token-punctuation">;</span>
+        <span class="token-type">int</span> j <span class="token-operator">=</span> i <span class="token-operator">-</span> <span class="token-number">1</span><span class="token-punctuation">;</span>
+        <span class="token-keyword">while</span><span class="token-punctuation">(</span>j <span class="token-operator">&gt;=</span> <span class="token-number">0</span> <span class="token-operator">&amp;&amp;</span> arr<span class="token-punctuation">[</span>j<span class="token-punctuation">]</span> <span class="token-operator">&gt;</span> key<span class="token-punctuation">)</span><span class="token-punctuation">{</span>
+            arr<span class="token-punctuation">[</span>j <span class="token-operator">+</span> <span class="token-number">1</span><span class="token-punctuation">]</span> <span class="token-operator">=</span> arr<span class="token-punctuation">[</span>j<span class="token-punctuation">]</span><span class="token-punctuation">;</span>
+            j<span class="token-operator">--</span><span class="token-punctuation">;</span>
+        <span class="token-punctuation">}</span>
+        arr<span class="token-punctuation">[</span>j <span class="token-operator">+</span> <span class="token-number">1</span><span class="token-punctuation">]</span> <span class="token-operator">=</span> key<span class="token-punctuation">;</span>
+    <span class="token-punctuation">}</span>
+<span class="token-punctuation">}</span></code></pre>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-2">🔄 Dry Run (arr = [5, 3, 4])</h4>
+                            <ul class="list-disc list-inside bg-white p-4 rounded-lg shadow-sm">
+                                <li><strong>i=1, key=3:</strong> Compare 3 with 5. Shift 5. Insert 3 → [3, 5, 4]</li>
+                                <li><strong>i=2, key=4:</strong> Compare 4 with 5. Shift 5. Insert 4 → [3, 4, 5]</li>
+                            </ul>
+                        </div>
+                        <div class="flashcard p-4 rounded-lg">
+                            <h4 class="text-lg font-semibold mb-2">🃏 Flashcards</h4>
+                            <p><strong>Q:</strong> Best case complexity?</p>
+                            <p><strong>A:</strong> O(n) (when the array is already sorted).</p>
+                            <p class="mt-2"><strong>Q:</strong> Worst case?</p>
+                            <p><strong>A:</strong> O(n²).</p>
+                            <p class="mt-2"><strong>Q:</strong> Is Insertion Sort stable?</p>
+                            <p><strong>A:</strong> ✅ Yes.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 5. Bubble Sort -->
+                <article class="mb-12">
+                    <h3 class="text-2xl font-semibold mb-4">5️⃣ Bubble Sort</h3>
+                    <div class="space-y-6">
+                        <p><span class="concept-icon">🔑</span><strong class="font-semibold">Concept:</strong> Repeatedly steps through the list, compares adjacent elements and swaps them if they are in the wrong order. The pass through the list is repeated until the list is sorted. The largest element "bubbles" to the top.</p>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-2">💻 Code</h4>
+                            <pre><code class="language-cpp"><span class="token-keyword">void</span> <span class="token-function">bubbleSort</span><span class="token-punctuation">(</span><span class="token-type">int</span> arr<span class="token-punctuation">[</span><span class="token-punctuation">]</span><span class="token-punctuation">,</span> <span class="token-type">int</span> n<span class="token-punctuation">)</span><span class="token-punctuation">{</span>
+    <span class="token-keyword">for</span><span class="token-punctuation">(</span><span class="token-type">int</span> i <span class="token-operator">=</span> <span class="token-number">0</span><span class="token-punctuation">;</span> i <span class="token-operator">&lt;</span> n <span class="token-operator">-</span> <span class="token-number">1</span><span class="token-punctuation">;</span> i<span class="token-operator">++</span><span class="token-punctuation">)</span><span class="token-punctuation">{</span>
+        <span class="token-keyword">bool</span> swapped <span class="token-operator">=</span> <span class="token-keyword">false</span><span class="token-punctuation">;</span>
+        <span class="token-keyword">for</span><span class="token-punctuation">(</span><span class="token-type">int</span> j <span class="token-operator">=</span> <span class="token-number">0</span><span class="token-punctuation">;</span> j <span class="token-operator">&lt;</span> n <span class="token-operator">-</span> <span class="token-number">1</span> <span class="token-operator">-</span> i<span class="token-punctuation">;</span> j<span class="token-operator">++</span><span class="token-punctuation">)</span><span class="token-punctuation">{</span>
+            <span class="token-keyword">if</span><span class="token-punctuation">(</span>arr<span class="token-punctuation">[</span>j<span class="token-punctuation">]</span> <span class="token-operator">&gt;</span> arr<span class="token-punctuation">[</span>j <span class="token-operator">+</span> <span class="token-number">1</span><span class="token-punctuation">]</span><span class="token-punctuation">)</span><span class="token-punctuation">{</span>
+                <span class="token-function">swap</span><span class="token-punctuation">(</span>arr<span class="token-punctuation">[</span>j<span class="token-punctuation">]</span><span class="token-punctuation">,</span> arr<span class="token-punctuation">[</span>j <span class="token-operator">+</span> <span class="token-number">1</span><span class="token-punctuation">]</span><span class="token-punctuation">)</span><span class="token-punctuation">;</span>
+                swapped <span class="token-operator">=</span> <span class="token-keyword">true</span><span class="token-punctuation">;</span>
+            <span class="token-punctuation">}</span>
+        <span class="token-punctuation">}</span>
+        <span class="token-keyword">if</span><span class="token-punctuation">(</span><span class="token-operator">!</span>swapped<span class="token-punctuation">)</span> <span class="token-keyword">break</span><span class="token-punctuation">;</span> <span class="token-comment">// Optimization for already sorted array</span>
+    <span class="token-punctuation">}</span>
+<span class="token-punctuation">}</span></code></pre>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-2">🔄 Dry Run (arr = [5, 1, 4, 2])</h4>
+                            <ul class="list-disc list-inside bg-white p-4 rounded-lg shadow-sm">
+                                <li><strong>Pass 1:</strong> [1, 5, 4, 2] → [1, 4, 5, 2] → [1, 4, 2, 5]</li>
+                                <li><strong>Pass 2:</strong> [1, 4, 2, 5] → [1, 2, 4, 5]</li>
+                                <li><strong>Pass 3:</strong> No swaps. Array is sorted.</li>
+                            </ul>
+                        </div>
+                        <div class="flashcard p-4 rounded-lg">
+                            <h4 class="text-lg font-semibold mb-2">🃏 Flashcards</h4>
+                            <p><strong>Q:</strong> Time complexity (worst)?</p>
+                            <p><strong>A:</strong> O(n²).</p>
+                            <p class="mt-2"><strong>Q:</strong> Best case (already sorted with optimization)?</p>
+                            <p><strong>A:</strong> O(n).</p>
+                            <p class="mt-2"><strong>Q:</strong> Is Bubble Sort stable?</p>
+                            <p><strong>A:</strong> ✅ Yes.</p>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- 6. Heap Sort (Added) -->
+                <article class="mb-12">
+                    <h3 class="text-2xl font-semibold mb-4">6️⃣ Heap Sort</h3>
+                    <div class="space-y-6">
+                        <p><span class="concept-icon">🔑</span><strong class="font-semibold">Concept:</strong> It's a comparison-based sorting algorithm that uses a binary heap data structure. It first converts the array into a max heap. Then, it repeatedly swaps the root (maximum element) with the last element, reduces the heap size, and calls heapify on the root to maintain the heap property.</p>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-2">💻 Code</h4>
+                            <pre><code class="language-cpp"><span class="token-keyword">void</span> <span class="token-function">heapify</span><span class="token-punctuation">(</span><span class="token-type">int</span> arr<span class="token-punctuation">[</span><span class="token-punctuation">]</span><span class="token-punctuation">,</span> <span class="token-type">int</span> n<span class="token-punctuation">,</span> <span class="token-type">int</span> i<span class="token-punctuation">)</span> <span class="token-punctuation">{</span>
+    <span class="token-type">int</span> largest <span class="token-operator">=</span> i<span class="token-punctuation">;</span>
+    <span class="token-type">int</span> left <span class="token-operator">=</span> <span class="token-number">2</span> <span class="token-operator">*</span> i <span class="token-operator">+</span> <span class="token-number">1</span><span class="token-punctuation">;</span>
+    <span class="token-type">int</span> right <span class="token-operator">=</span> <span class="token-number">2</span> <span class="token-operator">*</span> i <span class="token-operator">+</span> <span class="token-number">2</span><span class="token-punctuation">;</span>
+
+    <span class="token-keyword">if</span> <span class="token-punctuation">(</span>left <span class="token-operator">&lt;</span> n <span class="token-operator">&amp;&amp;</span> arr<span class="token-punctuation">[</span>left<span class="token-punctuation">]</span> <span class="token-operator">&gt;</span> arr<span class="token-punctuation">[</span>largest<span class="token-punctuation">]</span><span class="token-punctuation">)</span>
+        largest <span class="token-operator">=</span> left<span class="token-punctuation">;</span>
+
+    <span class="token-keyword">if</span> <span class="token-punctuation">(</span>right <span class="token-operator">&lt;</span> n <span class="token-operator">&amp;&amp;</span> arr<span class="token-punctuation">[</span>right<span class="token-punctuation">]</span> <span class="token-operator">&gt;</span> arr<span class="token-punctuation">[</span>largest<span class="token-punctuation">]</span><span class="token-punctuation">)</span>
+        largest <span class="token-operator">=</span> right<span class="token-punctuation">;</span>
+
+    <span class="token-keyword">if</span> <span class="token-punctuation">(</span>largest <span class="token-operator">!=</span> i<span class="token-punctuation">)</span> <span class="token-punctuation">{</span>
+        <span class="token-function">swap</span><span class="token-punctuation">(</span>arr<span class="token-punctuation">[</span>i<span class="token-punctuation">]</span><span class="token-punctuation">,</span> arr<span class="token-punctuation">[</span>largest<span class="token-punctuation">]</span><span class="token-punctuation">)</span><span class="token-punctuation">;</span>
+        <span class="token-function">heapify</span><span class="token-punctuation">(</span>arr<span class="token-punctuation">,</span> n<span class="token-punctuation">,</span> largest<span class="token-punctuation">)</span><span class="token-punctuation">;</span>
+    <span class="token-punctuation">}</span>
+<span class="token-punctuation">}</span>
+
+<span class="token-keyword">void</span> <span class="token-function">heapSort</span><span class="token-punctuation">(</span><span class="token-type">int</span> arr<span class="token-punctuation">[</span><span class="token-punctuation">]</span><span class="token-punctuation">,</span> <span class="token-type">int</span> n<span class="token-punctuation">)</span> <span class="token-punctuation">{</span>
+    <span class="token-comment">// Build max heap</span>
+    <span class="token-keyword">for</span> <span class="token-punctuation">(</span><span class="token-type">int</span> i <span class="token-operator">=</span> n <span class="token-operator">/</span> <span class="token-number">2</span> <span class="token-operator">-</span> <span class="token-number">1</span><span class="token-punctuation">;</span> i <span class="token-operator">&gt;=</span> <span class="token-number">0</span><span class="token-punctuation">;</span> i<span class="token-operator">--</span><span class="token-punctuation">)</span>
+        <span class="token-function">heapify</span><span class="token-punctuation">(</span>arr<span class="token-punctuation">,</span> n<span class="token-punctuation">,</span> i<span class="token-punctuation">)</span><span class="token-punctuation">;</span>
+
+    <span class="token-comment">// Extract elements from heap</span>
+    <span class="token-keyword">for</span> <span class="token-punctuation">(</span><span class="token-type">int</span> i <span class="token-operator">=</span> n <span class="token-operator">-</span> <span class="token-number">1</span><span class="token-punctuation">;</span> i <span class="token-operator">&gt;</span> <span class="token-number">0</span><span class="token-punctuation">;</span> i<span class="token-operator">--</span><span class="token-punctuation">)</span> <span class="token-punctuation">{</span>
+        <span class="token-function">swap</span><span class="token-punctuation">(</span>arr<span class="token-punctuation">[</span><span class="token-number">0</span><span class="token-punctuation">]</span><span class="token-punctuation">,</span> arr<span class="token-punctuation">[</span>i<span class="token-punctuation">]</span><span class="token-punctuation">)</span><span class="token-punctuation">;</span>
+        <span class="token-function">heapify</span><span class="token-punctuation">(</span>arr<span class="token-punctuation">,</span> i<span class="token-punctuation">,</span> <span class="token-number">0</span><span class="token-punctuation">)</span><span class="token-punctuation">;</span>
+    <span class="token-punctuation">}</span>
+<span class="token-punctuation">}</span></code></pre>
+                        </div>
+                        <div class="flashcard p-4 rounded-lg">
+                            <h4 class="text-lg font-semibold mb-2">🃏 Flashcards</h4>
+                            <p><strong>Q:</strong> Time complexity of Heap Sort?</p>
+                            <p><strong>A:</strong> O(n log n) (for all cases).</p>
+                            <p class="mt-2"><strong>Q:</strong> Space complexity?</p>
+                            <p><strong>A:</strong> O(1) (in-place).</p>
+                            <p class="mt-2"><strong>Q:</strong> Is Heap Sort stable?</p>
+                            <p><strong>A:</strong> ❌ No.</p>
+                        </div>
+                    </div>
+                </article>
+            </section>
+
+            <!-- Pictorial Walkthroughs Section -->
+            <section id="visualizations" class="mb-16">
+                <h2 class="text-3xl font-bold border-b-2 border-green-500 pb-2 mb-8">🌀 Pictorial Walkthroughs</h2>
+                
+                <!-- Quick Sort Visualization -->
+                <article class="mb-12">
+                    <h3 class="text-2xl font-semibold mb-4">🔥 Quick Sort</h3>
+                    <p class="mb-4">Example: arr = [10, 80, 30, 90, 40, 50, 70]</p>
+                    <pre class="text-sm">
+Step 1: Choose pivot = 10
+[10 | 80, 30, 90, 40, 50, 70] -> 10 is placed in its final position.
+
+Recursion Tree:
+                   [10,80,30,90,40,50,70]
+                  /                      \
+           [ ] (LHS < 10)          [80,30,90,40,50,70] (RHS)
+
+Step 2: Pivot in RHS = 80
+[30, 40, 50, 70 | 80 | 90]
+
+Recursion Tree:
+                     [10,80,30,90,40,50,70]
+                    /                      \
+                 []                      [80,30,90,40,50,70]
+                                          /                 \
+                                [30,40,50,70]              [90]
+
+Step 3: Pivot = 30 in [30,40,50,70]
+[30 | 40, 50, 70]
+
+Final Tree:
+                          [10,80,30,90,40,50,70]
+                         /                      \
+                       []                      [80,30,90,40,50,70]
+                                               /                 \
+                                    [30,40,50,70]              [90]
+                                    /          \
+                                  []           [40,50,70]
+                                               /      \
+                                             []       [50,70]
+                                                       /   \
+                                                     []    [70]
+✅ At the leaves, all arrays are size 1 → fully sorted.
+</pre>
+                </article>
+
+                <!-- Merge Sort Visualization -->
+                <article>
+                    <h3 class="text-2xl font-semibold mb-4">🌀 Merge Sort</h3>
+                    <p class="mb-4">Example: arr = [38, 27, 43, 3, 9, 82, 10]</p>
+                    <pre class="text-sm">
+Step 1 & 2: Keep Splitting
+                        [38,27,43,3,9,82,10]
+                     /                           \
+             [38,27,43,3]                      [9,82,10]
+             /           \                     /       \
+       [38,27]         [43,3]             [9,82]       [10]
+       /    \          /    \             /    \
+    [38]   [27]    [43]    [3]         [9]    [82]
+
+Step 3: Start merging back
+ [38] + [27] → [27,38]
+ [43] + [3]  → [3,43]
+ [9] + [82]  → [9,82]
+
+Step 4: Higher-level merges
+ [27,38] + [3,43]   → [3,27,38,43]
+ [9,82]  + [10]     → [9,10,82]
+
+Step 5: Final merge
+ [3,27,38,43] + [9,10,82] → [3,9,10,27,38,43,82]
+✅ Array is sorted.
+</pre>
+                </article>
+            </section>
+
+            <!-- Summary Section -->
+            <section id="summary" class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-3xl font-bold border-b-2 border-purple-500 pb-2 mb-8">🎯 Summary Flashcards</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-semibold text-lg mb-2">Stability</h4>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li><strong class="text-green-600">Stable:</strong> Merge, Insertion, Bubble</li>
+                            <li><strong class="text-red-600">Unstable:</strong> Selection, Quick, Heap</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-lg mb-2">Time Complexity</h4>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li><strong class="text-blue-600">O(n log n):</strong> Merge, Quick (avg), Heap</li>
+                            <li><strong class="text-orange-600">O(n²):</strong> Selection, Insertion (worst), Bubble (worst), Quick (worst)</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center mt-12 text-gray-500">
+            <p>&copy; 2024 DSA Revision Notes. Happy Coding!</p>
+        </footer>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Notes: Linked Lists (A-Z Revision)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        h1, h2, h3 {
+            font-weight: 700;
+            color: #0f172a;
+        }
+        h1 {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+        h2 {
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            margin-top: 2.5rem;
+        }
+        h3 {
+            margin-top: 1.5rem;
+            font-weight: 600;
+        }
+        pre[class*="language-"] {
+            font-family: 'Fira Code', monospace;
+            border-radius: 0.5rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05);
+        }
+        code[class*="language-"] {
+            font-family: 'Fira Code', monospace;
+        }
+        .flashcard {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-top: 1rem;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05);
+        }
+        .flashcard-q {
+            font-weight: 600;
+            color: #475569;
+        }
+        .flashcard-a {
+            margin-top: 0.5rem;
+            color: #334155;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        hr {
+            border-color: #cbd5e1;
+            margin-top: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+        .approach-note {
+            margin-top: 0.5rem;
+            margin-bottom: 0.75rem;
+            font-style: italic;
+            color: #475569;
+            border-left: 3px solid #94a3b8;
+            padding-left: 0.75rem;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="bg-slate-800 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-2xl font-bold text-white hover:text-slate-200 transition">DSA Revision Hub</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-2">
+                        <a href="array.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Arrays</a>
+                        <a href="string.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Strings</a>
+                        <a href="ll.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Linked List</a>
+                        <a href="stack.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Stack</a>
+                        <a href="queue_deque.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Queue/Deque</a>
+                        <a href="tree.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Tree</a>
+                        <a href="heap.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Heap</a>
+                        <a href="hashing.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Hashing</a>
+                        <a href="sorting.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sorting</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container pt-24">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl md:text-5xl font-bold">🔗 Linked Lists: The Complete Revision Guide</h1>
+        </header>
+
+        <main>
+            <!-- Section 1: Singly Linked List -->
+            <section>
+                <h2 class="text-3xl">1. Singly Linked List Basics</h2>
+                <h3>Insert at Beginning (O(1))</h3>
+                <p class="approach-note">The most efficient insertion. Create a new node, point its `next` to the current head, and then make the new node the new head.</p>
+<pre><code class="language-cpp">
+node *insertBegin(int info, node *head){
+    node *temp = new node(info);
+    temp->next = head;
+    return temp;
+}
+</code></pre>
+                <h3>Insert at End (O(n))</h3>
+                <p class="approach-note">Requires traversing the list to the last node. Once found, update its `next` pointer to the new node.</p>
+<pre><code class="language-cpp">
+node *insertEnd(int info, node *head){
+    node *temp = new node(info);
+    if (head == NULL) return temp;
+    
+    node *temp1 = head;
+    while (temp1->next != NULL) {
+        temp1 = temp1->next;
+    }
+    temp1->next = temp;
+    return head;
+}
+</code></pre>
+                <h3>Insert at a Specific Position (O(n))</h3>
+                <p class="approach-note">Traverse to the node just before the target position (`pos - 1`). Adjust pointers to insert the new node. Handle the edge case where `pos == 1` (same as insert at beginning).</p>
+<pre><code class="language-cpp">
+node *inPos(node *head, int pos, int info){
+    node *temp1 = new node(info);
+    if (pos == 1) {
+        temp1->next = head;
+        return temp1;
+    }
+    node *cur = head;
+    for (int count = 1; cur != NULL && count < pos - 1; count++) {
+        cur = cur->next;
+    }
+    if (cur != NULL) {
+        temp1->next = cur->next;
+        cur->next = temp1;
+    }
+    return head;
+}
+</code></pre>
+            </section>
+
+            <hr>
+
+            <!-- Section 2: Circular Singly Linked List -->
+            <section>
+                <h2 class="text-3xl">2. Circular Singly Linked List</h2>
+                <h3>Concept</h3>
+                <p class="approach-note">A variation where the last node points back to the first node (head) instead of NULL, forming a loop. This is useful for applications requiring a cycle, like a slideshow or round-robin scheduling.</p>
+                <h3>Insertion at Beginning (O(n))</h3>
+                <p class="approach-note">To insert at the beginning, you must find the last node to update its `next` pointer to the new head. This traversal makes the operation O(n).</p>
+<pre><code class="language-cpp">
+node *insertB(node *head, int info){
+    node *temp = new node(info);
+    if (head == NULL) {
+        temp->next = temp;
+        return temp;
+    }
+    node *curr = head;
+    while (curr->next != head) {
+        curr = curr->next;
+    }
+    curr->next = temp;
+    temp->next = head;
+    return temp;
+}
+</code></pre>
+                <h3>Insertion at End (Efficient O(1) Method)</h3>
+                <p class="approach-note">A clever trick avoids O(n) traversal. Insert the new node immediately after the head, then swap the data between the head and the new node. The original head node effectively becomes the new tail, and we can make the newly inserted node the new head.</p>
+<pre><code class="language-cpp">
+node* insertEnd(node* head, int x) {
+    node* temp = new node(x);
+    if (head == NULL) {
+        temp->next = temp;
+        return temp;
+    }
+    // Insert new node right after head
+    temp->next = head->next;
+    head->next = temp;
+
+    // Swap data
+    int t = temp->info;
+    temp->info = head->info;
+    head->info = t;
+
+    // The new node becomes the new head, and the old head is now at the end
+    return temp;
+}
+</code></pre>
+            </section>
+
+            <hr>
+
+            <!-- Section 3: Circular Doubly Linked List -->
+            <section>
+                <h2 class="text-3xl">3. Circular Doubly Linked List</h2>
+                <h3>Concept</h3>
+                <p class="approach-note">Combines features of both doubly and circular lists. The `next` of the last node points to the head, and the `prev` of the head points to the last node. This allows for efficient, O(1) bidirectional traversal and insertion/deletion at both ends.</p>
+                <h3>Insertion at Head (O(1))</h3>
+                <p class="approach-note">Insertion is highly efficient because the head's `prev` pointer gives direct access to the tail. No traversal is needed.</p>
+<pre><code class="language-cpp">
+node *insertH(node *head, int info){
+    node *temp = new node(info);
+    if (head == NULL) {
+        temp->next = temp;
+        temp->prev = temp;
+        return temp;
+    }
+    temp->prev = head->prev; // New node's prev points to tail
+    temp->next = head;       // New node's next points to old head
+    head->prev->next = temp; // Tail's next points to new node
+    head->prev = temp;       // Old head's prev points to new node
+    return temp;             // New node is the new head
+}
+</code></pre>
+            </section>
+
+            <hr>
+
+            <!-- Section 4: Classic Algorithms -->
+            <section>
+                <h2 class="text-3xl">4. Classic Algorithms & Problems</h2>
+                <h3>Find Middle Element (Tortoise & Hare)</h3>
+                <p class="approach-note">A classic single-pass algorithm using two pointers. A `slow` pointer moves one step at a time, while a `fast` pointer moves two steps. When the `fast` pointer reaches the end, the `slow` pointer will be at the middle.</p>
+<pre><code class="language-cpp">
+void middleEle(node* head){
+    if(head == NULL) return;
+    
+    node *slow = head;
+    node *fast = head;
+
+    while (fast != NULL && fast->next != NULL) {
+        fast = fast->next->next;
+        slow = slow->next;
+    }
+    cout << "Middle element is: " << slow->info;
+}
+</code></pre>
+
+                <h3>Reverse Linked List in Groups of K</h3>
+                <p class="approach-note">The core idea is to reverse the first `k` nodes, then recursively call the function for the rest of the list. The head of the original sublist becomes its tail and must be connected to the head of the next reversed group.</p>
+<pre><code class="language-cpp">
+node *reversekr(node *head, int k){
+    node *curr = head, *next = NULL, *prev = NULL;
+    int count = 0;
+
+    // 1. Reverse the first k nodes
+    while (curr != NULL && count < k){
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+        count++;
+    }
+
+    // 2. 'next' now points to the (k+1)th node. Recurse.
+    if (next != NULL){
+        head->next = reversekr(next, k);
+    }
+
+    // 3. 'prev' is the new head of this reversed group
+    return prev;
+}
+</code></pre>
+
+                <h3>Merge Two Sorted Linked Lists</h3>
+                <p class="approach-note">Iterate through both lists, picking the smaller element at each step and appending it to a new merged list. A `dummy` head node simplifies handling the start of the merged list.</p>
+<pre><code class="language-cpp">
+node* mergeSorted(node* l1, node* l2) {
+    if (l1 == NULL) return l2;
+    if (l2 == NULL) return l1;
+
+    node* dummy = new node(0);
+    node* tail = dummy;
+
+    while (l1 != NULL && l2 != NULL) {
+        if (l1->info <= l2->info) {
+            tail->next = l1;
+            l1 = l1->next;
+        } else {
+            tail->next = l2;
+            l2 = l2->next;
+        }
+        tail = tail->next;
+    }
+
+    // Append the remaining nodes from the non-empty list
+    tail->next = (l1 != NULL) ? l1 : l2;
+
+    return dummy->next;
+}
+</code></pre>
+            </section>
+            
+            <hr>
+
+            <!-- Master Flashcards -->
+            <section>
+                <h2 class="text-3xl">🃏 Master Flashcards for Linked Lists</h2>
+                <div class="flashcard">
+                    <p class="flashcard-q">Q: What is the time complexity to access an element by index in a linked list?</p>
+                    <p class="flashcard-a">A: O(n), because you must traverse from the head.</p>
+                </div>
+                <div class="flashcard">
+                    <p class="flashcard-q">Q: How do you find the middle of a linked list in one pass?</p>
+                    <p class="flashcard-a">A: Using the Tortoise and Hare (slow and fast pointer) algorithm.</p>
+                </div>
+                <div class="flashcard">
+                    <p class="flashcard-q">Q: What's the main advantage of a doubly linked list over a singly linked list?</p>
+                    <p class="flashcard-a">A: It allows for bidirectional traversal and efficient deletion of a node if you only have a pointer to that node (O(1)).</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

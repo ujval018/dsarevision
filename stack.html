@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Notes: Stacks </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        h1, h2, h3 {
+            font-weight: 700;
+            color: #0f172a;
+        }
+        h1 {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+        h2 {
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            margin-top: 2.5rem;
+        }
+        h3 {
+            margin-top: 1.5rem;
+            font-weight: 600;
+        }
+        pre[class*="language-"] {
+            font-family: 'Fira Code', monospace;
+            border-radius: 0.5rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05);
+        }
+        code[class*="language-"] {
+            font-family: 'Fira Code', monospace;
+        }
+        .flashcard {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-top: 1rem;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05);
+        }
+        .flashcard-q {
+            font-weight: 600;
+            color: #475569;
+        }
+        .flashcard-a {
+            margin-top: 0.5rem;
+            color: #334155;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        hr {
+            border-color: #cbd5e1;
+            margin-top: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+        .approach-note {
+            margin-top: 0.5rem;
+            margin-bottom: 0.75rem;
+            font-style: italic;
+            color: #475569;
+            border-left: 3px solid #94a3b8;
+            padding-left: 0.75rem;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="bg-slate-800 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-2xl font-bold text-white hover:text-slate-200 transition">DSA Revision Hub</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-2">
+                        <a href="array.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Arrays</a>
+                        <a href="string.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Strings</a>
+                        <a href="ll.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Linked List</a>
+                        <a href="stack.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Stack</a>
+                        <a href="queue_deque.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Queue/Deque</a>
+                        <a href="tree.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Tree</a>
+                        <a href="heap.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Heap</a>
+                        <a href="hashing.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Hashing</a>
+                        <a href="sorting.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sorting</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container pt-24">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl md:text-5xl font-bold">📚 Stacks: The Complete A-Z Revision Guide</h1>
+        </header>
+
+        <main>
+            <!-- Section 1: Fundamentals -->
+            <section>
+                <h2 class="text-3xl">1. Fundamentals of a Stack</h2>
+                <h3>Concept</h3>
+                <p class="approach-note">A Stack is a linear data structure that follows the **LIFO (Last-In, First-Out)** principle. Think of it like a stack of plates: the last plate you add is the first one you remove. This makes it ideal for tasks that require reversing order or managing nested operations, like function calls.</p>
+                <ul class="list-disc list-inside mt-2 space-y-1 pl-2">
+                    <li><strong>push(item):</strong> Adds an item to the top of the stack.</li>
+                    <li><strong>pop():</strong> Removes and returns the item from the top of the stack.</li>
+                    <li><strong>peek() / top():</strong> Returns the top item without removing it.</li>
+                    <li><strong>isEmpty():</strong> Checks if the stack is empty.</li>
+                </ul>
+            </section>
+
+            <hr>
+
+            <!-- Section 2: Implementations -->
+            <section>
+                <h2 class="text-3xl">2. Stack Implementations</h2>
+                <h3>Array-based Stack (Static)</h3>
+                <p class="approach-note">Simple and fast due to contiguous memory. The main drawback is its fixed size, which can lead to overflow if not managed carefully.</p>
+<pre><code class="language-cpp">
+#include &lt;climits&gt; // For INT_MIN
+#define MAX 1000
+class Stack {
+    int top;
+public:
+    int a[MAX];
+    Stack() { top = -1; }
+    // Returns true on success, false on overflow
+    bool push(int x) {
+        if (top >= (MAX - 1)) return false; // Stack Overflow
+        a[++top] = x;
+        return true;
+    }
+    int pop() {
+        if (top < 0) {
+            // Returning a special value like INT_MIN is better than 0
+            // to distinguish underflow from storing the value 0.
+            return INT_MIN; // Stack Underflow
+        }
+        return a[top--];
+    }
+    int peek() {
+        if (top < 0) return INT_MIN; // Stack Underflow
+        return a[top];
+    }
+    bool isEmpty() { return (top < 0); }
+};
+</code></pre>
+                <h3>Linked List-based Stack (Dynamic)</h3>
+                <p class="approach-note">Uses pointers to link nodes, allowing the stack to grow or shrink dynamically. It avoids the overflow problem of static arrays but has a slight overhead due to pointer storage.</p>
+<pre><code class="language-cpp">
+#include &lt;climits&gt; // For INT_MIN
+struct Node {
+    int data;
+    Node* next;
+    Node(int d){ data = d; next = NULL; }
+};
+
+class LLStack {
+    Node* head;
+public:
+    LLStack(){ head = NULL; }
+    void push(int x){
+        Node* temp = new Node(x);
+        temp->next = head;
+        head = temp;
+    }
+    int pop(){
+        if(!head) return INT_MIN; // Underflow
+        int res = head->data;
+        Node* temp = head;
+        head = head->next;
+        delete temp; // Use 'delete' operator in C++
+        return res;
+    }
+    int peek(){
+        if(!head) return INT_MIN; // Underflow
+        return head->data;
+    }
+    bool isEmpty(){
+        return (head == NULL);
+    }
+};
+</code></pre>
+            </section>
+
+            <hr>
+
+            <!-- Section 3: Core Problems -->
+            <section>
+                <h2 class="text-3xl">3. Core Stack Problems</h2>
+                <h3>Two Stacks in One Array</h3>
+                <p class="approach-note">To optimize space, one stack grows from the left (`t1 = -1`) and the other from the right (`t2 = n`). The array is full only when their pointers meet (`t1 + 1 == t2`), preventing overflow until all space is used.</p>
+<pre><code class="language-cpp">
+class TwoStack {
+    int *arr, cap, t1, t2; // t1 is for stack1 (left), t2 is for stack2 (right)
+public:
+    TwoStack(int c){ arr=new int[c]; cap=c; t1=-1; t2=c; }
+    // Push to stack 1 (from left)
+    bool push1(int x){
+        if(t1 < t2 - 1){ arr[++t1] = x; return true; }
+        return false; // Overflow
+    }
+    // Push to stack 2 (from right)
+    bool push2(int x){
+        if(t1 < t2 - 1){ arr[--t2] = x; return true; }
+        return false; // Overflow
+    }
+    // Pop from stack 1
+    int pop1(){ return (t1 >= 0) ? arr[t1--] : INT_MIN; } // Underflow
+    // Pop from stack 2
+    int pop2(){ return (t2 < cap) ? arr[t2++] : INT_MIN; } // Underflow
+};
+</code></pre>
+                <h3>Balanced Parentheses</h3>
+                <p class="approach-note">A classic use case. Push opening brackets `(,{,[`. On encountering a closing bracket, check if the stack top is its matching pair. If it is, pop. If not, or if the stack is empty, the string is unbalanced. The string is balanced only if the stack is empty at the end.</p>
+<pre><code class="language-cpp">
+bool isBalanced(string str){
+    stack<char> st;
+    for(char x: str){
+        if(x=='('||x=='{'||x=='[') st.push(x);
+        else {
+            if(st.empty()) return false; // Closing bracket with no opening
+            char top = st.top();
+            if((x==')' && top!='(') || (x=='}' && top!='{') || (x==']' && top!='['))
+                return false;
+            // Matched pair
+            st.pop();
+        }
+    }
+    return st.empty();
+}
+</code></pre>
+            </section>
+
+            <hr>
+            
+            <!-- Section 4: Expression Evaluation -->
+            <section>
+                <h2 class="text-3xl">4. Expression Conversion & Evaluation</h2>
+                <h3>Infix to Postfix Conversion</h3>
+                <p class="approach-note">Uses a stack to handle operator precedence. Operands go to the result. Operators are pushed, but only after popping all higher/equal precedence operators from the stack to the result.</p>
+<pre><code class="language-cpp">
+int precedence(char c){
+    if(c=='^') return 3;
+    if(c=='*'||c=='/') return 2;
+    if(c=='+'||c=='-') return 1;
+    return -1;
+}
+// Note: This implementation assumes single-character operands.
+string infixToPostfix(string s) {
+    stack<char> st;
+    string result;
+    for(char c : s) {
+        if((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) result += c;
+        else if(c == '(') st.push('(');
+        else if(c == ')') {
+            while(!st.empty() && st.top() != '(') {
+                result += st.top();
+                st.pop();
+            }
+            if(!st.empty()) st.pop(); // Pop the '('
+        }
+        else {
+            while(!st.empty() && precedence(st.top()) >= precedence(c)) {
+                result += st.top();
+                st.pop();
+            }
+            st.push(c);
+        }
+    }
+    while(!st.empty()) {
+        result += st.top();
+        st.pop();
+    }
+    return result;
+}
+</code></pre>
+            </section>
+
+            <hr>
+
+            <!-- Section 5: Monotonic Stack Applications -->
+            <section>
+                <h2 class="text-3xl">5. Monotonic Stack Applications</h2>
+                <p class="approach-note">A monotonic stack is a stack where elements are always in a sorted order (either increasing or decreasing). This pattern is incredibly powerful for problems that involve finding the "next" or "previous" greater/smaller element.</p>
+                
+                <h3>Next Greater Element (NGE)</h3>
+                <p class="approach-note">To find the NGE for each element, traverse from right to left. Pop from the stack while its top is <= the current element. The remaining stack top is the NGE.</p>
+<pre><code class="language-cpp">
+vector<long long> nextLargerElement(vector<long long> arr, int n){
+    vector<long long> res(n);
+    stack<long long> s;
+    for (int i = n - 1; i >= 0; i--) {
+        while (!s.empty() && s.top() <= arr[i]) s.pop();
+        res[i] = s.empty() ? -1 : s.top();
+        s.push(arr[i]);
+    }
+    return res;
+}
+</code></pre>
+
+                <h3>Stock Span Problem</h3>
+                <p class="approach-note">This is equivalent to finding the "previous greater element". Traverse from left to right. The stack stores indices. For each price, pop indices from the stack if their price is <= the current price. The span is `current_index - stack.top()`.</p>
+<pre><code class="language-cpp">
+vector<int> calculateSpan(int price[], int n) {
+   vector<int> res(n);
+   stack<int> s;
+   s.push(0);
+   res[0] = 1;
+   for (int i = 1; i < n; i++) {
+      while (!s.empty() && price[s.top()] <= price[i]) s.pop();
+      res[i] = s.empty() ? (i + 1) : (i - s.top());
+      s.push(i);
+   }
+   return res;
+}
+</code></pre>
+
+                <h3>Largest Rectangle in Histogram</h3>
+                <p class="approach-note">The optimized O(n) solution finds the largest rectangle where each bar `i` is the smallest. For each bar, we need its "previous smaller" and "next smaller" element's index. A monotonic (increasing) stack helps find these boundaries in a single pass.</p>
+<pre><code class="language-cpp">// O(n) solution using a monotonic stack
+int largestRectangleArea(vector<int>& heights) {
+    stack<int> s;
+    int max_area = 0;
+    int n = heights.size();
+    // Loop through each bar, including a virtual bar of height 0 at the end
+    // to clear the stack.
+    for (int i = 0; i <= n; i++) {
+        // While stack is not empty and the current bar is shorter than the bar at stack top
+        while (!s.empty() && (i == n || heights[s.top()] >= heights[i])) {
+            // The bar at s.top() is the smallest bar in a potential rectangle.
+            int height = heights[s.top()];
+            s.pop();
+            // Width is from the new stack top (previous smaller) to current index i (next smaller).
+            int width = s.empty() ? i : i - s.top() - 1;
+            max_area = max(max_area, width * height);
+        }
+        s.push(i);
+    }
+    return max_area;
+}
+</code></pre>
+            </section>
+
+            <hr>
+
+            <!-- Master Flashcards -->
+            <section>
+                <h2 class="text-3xl">🃏 Master Flashcards for Stacks</h2>
+                <div class="flashcard">
+                    <p class="flashcard-q">Q: What is the core principle of a stack?</p>
+                    <p class="flashcard-a">A: LIFO (Last-In, First-Out).</p>
+                </div>
+                <div class="flashcard">
+                    <p class="flashcard-q">Q: What is a monotonic stack?</p>
+                    <p class="flashcard-a">A: A stack where elements are kept in a sorted (increasing or decreasing) order. It's used to efficiently find next/previous greater/smaller elements.</p>
+                </div>
+                <div class="flashcard">
+                    <p class="flashcard-q">Q: Name three classic problems solved efficiently with a monotonic stack.</p>
+                    <p class="flashcard-a">A: Next Greater Element, Stock Span Problem, and Largest Rectangle in Histogram.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

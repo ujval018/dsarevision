@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Notes: Binary Trees & BST</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        h1, h2, h3 {
+            font-weight: 700;
+            color: #0f172a;
+        }
+        h1 {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+        h2 {
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            margin-top: 2.5rem;
+        }
+        h3 {
+            margin-top: 1.5rem;
+            font-weight: 600;
+        }
+        pre[class*="language-"] {
+            font-family: 'Fira Code', monospace;
+            border-radius: 0.5rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05);
+        }
+        code[class*="language-"] {
+            font-family: 'Fira Code', monospace;
+        }
+        .flashcard {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-top: 1rem;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05);
+        }
+        .flashcard-q {
+            font-weight: 600;
+            color: #475569;
+        }
+        .flashcard-a {
+            margin-top: 0.5rem;
+            color: #334155;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        hr {
+            border-color: #cbd5e1;
+            margin-top: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+        .approach-note {
+            margin-top: 0.5rem;
+            margin-bottom: 0.75rem;
+            font-style: italic;
+            color: #475569;
+            border-left: 3px solid #94a3b8;
+            padding-left: 0.75rem;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="bg-slate-800 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-2xl font-bold text-white hover:text-slate-200 transition">DSA Revision Hub</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-2">
+                        <a href="array.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Arrays</a>
+                        <a href="string.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Strings</a>
+                        <a href="ll.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Linked List</a>
+                        <a href="stack.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Stack</a>
+                        <a href="queue_deque.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Queue/Deque</a>
+                        <a href="tree.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Tree</a>
+                        <a href="heap.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Heap</a>
+                        <a href="hashing.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Hashing</a>
+                        <a href="sorting.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sorting</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container pt-24">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl md:text-5xl font-bold">📒 Binary Trees & BST – Complete Notes</h1>
+        </header>
+
+        <main>
+            <!-- Section 1: BST Basics -->
+            <section>
+                <h2 class="text-3xl">1. BST Basics</h2>
+                
+                <h3>Concept</h3>
+                <ul class="list-disc list-inside mt-2 space-y-1 pl-2">
+                    <li><strong>BST property:</strong> For any node with key `K`:
+                        <ul class="list-disc list-inside ml-6">
+                            <li>Left child &lt; K</li>
+                            <li>Right child &gt; K</li>
+                        </ul>
+                    </li>
+                    <li>Inorder traversal of BST → sorted order.</li>
+                </ul>
+
+                <h3>Code Snippet</h3>
+                <p class="approach-note">Overview: The `insert` function recursively finds the correct position for a new key while maintaining the BST property. The `BST` function builds a tree by inserting elements from an array one by one.</p>
+<pre><code class="language-cpp">
+struct node {
+    int key;
+    node *left, *right;
+    node(int k) { key = k; left = right = NULL; }
+};
+
+node* insert(node* root, int x) {
+    if (!root) return new node(x);
+    if (x < root->key) root->left = insert(root->left, x);
+    else root->right = insert(root->right, x);
+    return root;
+}
+
+node* BST(vector&lt;int&gt; arr) {
+    node* root = NULL;
+    for (int x : arr) root = insert(root, x);
+    return root;
+}
+</code></pre>
+
+                <h3>Search in BST</h3>
+                <p class="approach-note">Approach: Compare the target key with the root's key. If they match, the key is found. If the target is smaller, search the left subtree; otherwise, search the right subtree. This is done recursively or iteratively.</p>
+<pre><code class="language-cpp">
+// Recursive
+bool search(node* root, int k) {
+    if (!root) return false;
+    if (root->key == k) return true;
+    return (k < root->key) ? search(root->left, k) : search(root->right, k);
+}
+
+// Iterative
+bool searchIter(node* root, int k) {
+    while (root) {
+        if (root->key == k) return true;
+        root = (k < root->key) ? root->left : root->right;
+    }
+    return false;
+}
+</code></pre>
+
+                <h3>Floor in BST (largest ≤ k)</h3>
+                <p class="approach-note">Approach: Traverse the tree from the root. Keep a `res` pointer to track the most recent node whose key is less than or equal to `k`. If the current node's key is greater than `k`, move left. Otherwise, update `res` and move right to find a potentially larger valid key.</p>
+<pre><code class="language-cpp">
+node* flooriter(node* root, int k) {
+    node* res = NULL;
+    while (root) {
+        if (root->key == k) return root;
+        else if (root->key > k) root = root->left;
+        else { res = root; root = root->right; }
+    }
+    return res;
+}
+</code></pre>
+
+                <h3>Check if a Tree is BST</h3>
+                <p class="mt-2"><strong>Method 1: Inorder traversal (track prev value)</strong></p>
+                <p class="approach-note">Approach: This method relies on the property that an inorder traversal of a valid BST yields a sorted sequence. We perform an inorder traversal while keeping track of the previously visited node's value to ensure it's always increasing.</p>
+<pre><code class="language-cpp">
+bool isBST(node* root, int &amp;prev) {
+    if (!root) return true;
+    if (!isBST(root->left, prev)) return false;
+    if (root->key <= prev) return false;
+    prev = root->key;
+    return isBST(root->right, prev);
+}
+</code></pre>
+                <p class="mt-4"><strong>Method 2: Min–Max range</strong></p>
+                <p class="approach-note">Approach: This method recursively validates each node. For a node to be valid, its key must fall within a `(min, max)` range. This range is updated and passed down to its children (e.g., for the left child, the new max becomes the parent's key).</p>
+<pre><code class="language-cpp">
+bool isBST(node* root, int min, int max) {
+    if (!root) return true;
+    return (root->key > min && root->key < max &&
+            isBST(root->left, min, root->key) &&
+            isBST(root->right, root->key, max));
+}
+</code></pre>
+
+                <h3 class="mt-8">Flashcards (BST)</h3>
+                <div class="flashcard">
+                    <p class="flashcard-q">Q: Inorder traversal of BST gives?</p>
+                    <p class="flashcard-a">A: Sorted sequence.</p>
+                </div>
+                <div class="flashcard">
+                    <p class="flashcard-q">Q: Floor of 14 in `[10,5,15,3,7,12,18]`?</p>
+                    <p class="flashcard-a">A: 12.</p>
+                </div>
+                <div class="flashcard">
+                    <p class="flashcard-q">Q: Two methods to check if a tree is BST?</p>
+                    <p class="flashcard-a">A: (1) Inorder increasing, (2) Min–Max range check.</p>
+                </div>
+            </section>
+            
+            <hr>
+
+            <!-- Section 2: Traversals -->
+            <section>
+                <h2 class="text-3xl">2. Traversals</h2>
+                
+                <h3>Code Snippets</h3>
+                <p class="approach-note">Overview: These are the three fundamental depth-first traversals. The difference lies in the order of visiting the root node relative to its left and right subtrees: Inorder (Left, Root, Right), Preorder (Root, Left, Right), and Postorder (Left, Right, Root).</p>
+<pre><code class="language-cpp">
+void inorder(node* root) {
+    if (!root) return;
+    inorder(root->left);
+    cout << root->key << " ";
+    inorder(root->right);
+}
+
+void preorder(node* root) {
+    if (!root) return;
+    cout << root->key << " ";
+    preorder(root->left);
+    preorder(root->right);
+}
+
+void postorder(node* root) {
+    if (!root) return;
+    postorder(root->left);
+    postorder(root->right);
+    cout << root->key << " ";
+}
+</code></pre>
+
+                <h3>Level Order</h3>
+                <p class="approach-note">Approach: This is a breadth-first traversal. It uses a queue to process nodes. The root is enqueued first. Then, in a loop, a node is dequeued, its value is printed, and its children (if any) are enqueued.</p>
+<pre><code class="language-cpp">
+void levelOrder(node* root) {
+    if (!root) return;
+    queue&lt;node*&gt; q; q.push(root);
+    while (!q.empty()) {
+        node* temp = q.front(); q.pop();
+        cout << temp->key << " ";
+        if (temp->left) q.push(temp->left);
+        if (temp->right) q.push(temp->right);
+    }
+}
+</code></pre>
+                <p class="mt-4"><strong>Line by line (using count):</strong></p>
+                <p class="approach-note">Approach: To print each level on a new line, we enhance the level order traversal. Before processing a level, we get the current size of the queue (`count`). We then run the inner loop exactly `count` times to process all nodes at that level before printing a newline.</p>
+<pre><code class="language-cpp">
+void levelOrderLineByLine(node* root) {
+    if (!root) return;
+    queue&lt;node*&gt; q; q.push(root);
+    while (!q.empty()) {
+        int count = q.size();
+        for (int i=0; i&lt;count; i++) {
+            node* temp = q.front(); q.pop();
+            cout << temp->key << " ";
+            if (temp->left) q.push(temp->left);
+            if (temp->right) q.push(temp->right);
+        }
+        cout << endl;
+    }
+}
+</code></pre>
+
+                <h3 class="mt-8">Flashcards (Traversal)</h3>
+                <div class="flashcard">
+                    <p class="flashcard-q">Q: Which traversal gives sorted order in BST?</p>
+                    <p class="flashcard-a">A: Inorder.</p>
+                </div>
+                <div class="flashcard">
+                    <p class="flashcard-q">Q: Level order uses which DS?</p>
+                    <p class="flashcard-a">A: Queue.</p>
+                </div>
+            </section>
+            
+            <hr>
+
+            <!-- Section 3: Properties of Tree -->
+            <section>
+                <h2 class="text-3xl">3. Properties of Tree</h2>
+
+                <h3>Height</h3>
+                <p class="approach-note">Approach: The height of a tree is calculated recursively. For any node, its height is 1 plus the maximum of the heights of its left and right subtrees. The base case is an empty tree, which has a height of 0.</p>
+<pre><code class="language-cpp">
+int heightT(node* root) {
+    if (!root) return 0;
+    return 1 + max(heightT(root->left), heightT(root->right));
+}
+</code></pre>
+
+                <h3>Size (# of nodes)</h3>
+                <p class="approach-note">Approach: The size of a tree is calculated recursively. For any node, the total size is 1 (for the node itself) plus the size of its left subtree plus the size of its right subtree. The base case is an empty tree, which has a size of 0.</p>
+<pre><code class="language-cpp">
+int sizeT(node* root) {
+    if (!root) return 0;
+    return 1 + sizeT(root->left) + sizeT(root->right);
+}
+</code></pre>
+
+                <h3>Max Value</h3>
+                <p class="approach-note">Approach: The maximum value in a tree is found recursively. It is the maximum of the root's key, the maximum value in the left subtree, and the maximum value in the right subtree. The base case is an empty tree, returning the smallest possible integer.</p>
+<pre><code class="language-cpp">
+int maxT(node* root) {
+    if (!root) return INT_MIN;
+    return max(root->key, max(maxT(root->left), maxT(root->right)));
+}
+</code></pre>
+
+                <h3>Child Sum Property</h3>
+                <p class="approach-note">Approach: This property is checked recursively. For each node, we verify if its key equals the sum of its immediate children's keys. This check must be true for the current node and all nodes in its left and right subtrees.</p>
+<pre><code class="language-cpp">
+bool childsum(node* root) {
+    if (!root || (!root->left && !root->right)) return true;
+    int sum = 0;
+    if (root->left) sum += root->left->key;
+    if (root->right) sum += root->right->key;
+    return (root->key == sum &&
+            childsum(root->left) && childsum(root->right));
+}
+</code></pre>
+
+                <h3>Balanced Tree</h3>
+                <p class="mt-2"><strong>Naive:</strong></p>
+                <p class="approach-note">Approach: For every node, this method recursively calculates the height of its left and right subtrees and checks if the difference is at most 1. This is inefficient (O(n²)) because it repeatedly calculates the height of the same nodes.</p>
+<pre><code class="language-cpp">
+bool isbalanced(node* root) {
+    if (!root) return true;
+    int lh = heightT(root->left), rh = heightT(root->right);
+    return abs(lh-rh) <= 1 && isbalanced(root->left) && isbalanced(root->right);
+}
+</code></pre>
+                <p class="mt-4"><strong>Optimized:</strong></p>
+                <p class="approach-note">Approach: This method combines the height calculation and balance check into a single recursive function. The function returns the tree's height if it's balanced, or -1 if it's not. This avoids redundant calculations, achieving O(n) time complexity.</p>
+<pre><code class="language-cpp">
+int isbalancedd(node* root) {
+    if (!root) return 0;
+    int lh = isbalancedd(root->left); if (lh == -1) return -1;
+    int rh = isbalancedd(root->right); if (rh == -1) return -1;
+    if (abs(lh-rh) > 1) return -1;
+    return 1 + max(lh, rh);
+}
+</code></pre>
+
+                <h3>Width of Tree</h3>
+                <p class="approach-note">Approach: The width is the maximum number of nodes at any level. This can be found using a level order traversal. At each level, the number of nodes is the current size of the queue. We keep track of the maximum size seen across all levels.</p>
+<pre><code class="language-cpp">
+int maxwidth(node* root) {
+    if (!root) return 0;
+    queue&lt;node*&gt; q; q.push(root);
+    int res = 0;
+    while (!q.empty()) {
+        int count = q.size();
+        res = max(res, count);
+        for (int i=0; i&lt;count; i++) {
+            node* temp = q.front(); q.pop();
+            if (temp->left) q.push(temp->left);
+            if (temp->right) q.push(temp->right);
+        }
+    }
+    return res;
+}
+</code></pre>
+
+                <h3 class="mt-8">Flashcards (Properties)</h3>
+                <div class="flashcard">
+                    <p class="flashcard-q">Q: Height of leaf node = ?</p>
+                    <p class="flashcard-a">A: 1.</p>
+                </div>
+                <div class="flashcard">
+                    <p class="flashcard-q">Q: Width of tree means?</p>
+                    <p class="flashcard-a">A: Max nodes at any level.</p>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- Section 4: Advanced Concepts -->
+            <section>
+                <h2 class="text-3xl">4. Advanced Concepts</h2>
+
+                <h3>Spiral/Zigzag Order</h3>
+                <p class="approach-note">Approach: This uses a deque (double-ended queue) and a flag. For one level, we process nodes from the back of the deque and add children to the front (right then left). For the next level, we process from the front and add children to the back (left then right), alternating with the flag.</p>
+<pre><code class="language-cpp">
+void spiraltree(node* root) {
+    if (!root) return;
+    deque&lt;node*&gt; dq; dq.push_back(root);
+    bool flag = true;
+    while (!dq.empty()) {
+        int count = dq.size();
+        if (flag) {
+            for (int i=0;i&lt;count;i++) {
+                node* temp = dq.back(); dq.pop_back();
+                cout << temp->key << " ";
+                if (temp->right) dq.push_front(temp->right);
+                if (temp->left) dq.push_front(temp->left);
+            }
+        } else {
+            for (int i=0;i&lt;count;i++) {
+                node* temp = dq.front(); dq.pop_front();
+                cout << temp->key << " ";
+                if (temp->left) dq.push_back(temp->left);
+                if (temp->right) dq.push_back(temp->right);
+            }
+        }
+        flag = !flag;
+    }
+}
+</code></pre>
+
+                <h3>Diameter</h3>
+                <p class="approach-note">Approach (Naive): For every node, the diameter is the maximum of three values: 1) the diameter of its left subtree, 2) the diameter of its right subtree, and 3) the path that goes through the current node (1 + height of left subtree + height of right subtree). This is O(n²).</p>
+<pre><code class="language-cpp">
+int diameter(node* root) {
+    if (!root) return 0;
+    int d1 = 1 + heightT(root->left) + heightT(root->right);
+    int d2 = diameter(root->left);
+    int d3 = diameter(root->right);
+    return max(d1, max(d2, d3));
+}
+</code></pre>
+
+                <h3>Convert Binary Tree → Doubly Linked List</h3>
+                <p class="approach-note">Approach: This is done using an inorder traversal. A static `prev` pointer is used to keep track of the previously processed node. During the traversal, the current node's left pointer is linked to `prev`, and `prev`'s right pointer is linked to the current node.</p>
+<pre><code class="language-cpp">
+node* convert_to_dll(node* root) {
+    static node* prev = NULL;
+    if (!root) return NULL;
+    node* head = convert_to_dll(root->left);
+    if (!prev) head = root;
+    else { root->left = prev; prev->right = root; }
+    prev = root;
+    convert_to_dll(root->right);
+    return head;
+}
+</code></pre>
+
+                <h3>Lowest Common Ancestor (LCA)</h3>
+                <p class="approach-note">Approach: Recursively search for the two nodes (`a` and `b`). If the current root is one of the nodes, it's a potential LCA. If recursive calls on the left and right subtrees both return non-NULL values, it means the nodes are in different subtrees, and the current root is the LCA.</p>
+<pre><code class="language-cpp">
+node* LCA(node* root, int a, int b) {
+    if (!root) return NULL;
+    if (root->key==a || root->key==b) return root;
+    node* l = LCA(root->left,a,b);
+    node* r = LCA(root->right,a,b);
+    if (l && r) return root;
+    return l ? l : r;
+}
+</code></pre>
+
+                <h3>Count Nodes in Complete Binary Tree</h3>
+                <p class="approach-note">Approach: An efficient method that leverages the 'complete' property. We calculate the height of the tree by only going left (`lh`) and only going right (`rh`). If `lh == rh`, the last level is full, and the count is `2^lh - 1`. Otherwise, we recursively count nodes in the left and right subtrees.</p>
+<pre><code class="language-cpp">
+int countCBT(node* root) {
+    if (!root) return 0;
+    int lh=0, rh=0;
+    node* curr=root;
+    while (curr) { lh++; curr=curr->left; }
+    curr=root;
+    while (curr) { rh++; curr=curr->right; }
+    if (lh==rh) return pow(2,lh)-1;
+    return 1+countCBT(root->left)+countCBT(root->right);
+}
+</code></pre>
+
+                <h3 class="mt-8">Flashcards (Advanced)</h3>
+                <div class="flashcard">
+                    <p class="flashcard-q">Q: Diameter of a tree = ?</p>
+                    <p class="flashcard-a">A: Longest path between any two nodes.</p>
+                </div>
+                <div class="flashcard">
+                    <p class="flashcard-q">Q: Spiral traversal uses which DS?</p>
+                    <p class="flashcard-a">A: Deque.</p>
+                </div>
+                <div class="flashcard">
+                    <p class="flashcard-q">Q: Count nodes in CBT faster using?</p>
+                    <p class="flashcard-a">A: Height comparison (O(log² n)).</p>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- Section 5: Leftover Important Snippets -->
+            <section>
+                <h2 class="text-3xl">5. Leftover Important Snippets</h2>
+                
+                <h3 class="mt-4">✅ Print Left View</h3>
+                <p class="approach-note">Approach: Use a preorder traversal (Root, Left, Right). Keep track of the maximum level visited so far. The first time we visit a new level, the current node is part of the left view, so we print it and update the max level.</p>
+<pre><code class="language-cpp">
+int maxlevel=0;
+void printLeftView(node* root, int level) {
+    if (!root) return;
+    if (maxlevel < level) {
+        cout << root->key << " ";
+        maxlevel = level;
+    }
+    printLeftView(root->left, level+1);
+    printLeftView(root->right, level+1);
+}
+</code></pre>
+
+                <h3 class="mt-4">✅ Sum of Diagonals (or vertical sums)</h3>
+                <p class="approach-note">Approach: Use a map to store the sum for each vertical line/diagonal. Traverse the tree (e.g., preorder). Pass a horizontal distance (`level`) in the recursive calls. For the left child, it's `level-1`; for the right, it's `level+1`. Add the node's key to the map at the corresponding level.</p>
+<pre><code class="language-cpp">
+void sum(node* root, unordered_map&lt;int,int&gt;&amp; m, int level=0) {
+    if (!root) return;
+    m[level]+=root->key;
+    sum(root->left,m,level-1);
+    sum(root->right,m,level+1);
+}
+</code></pre>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

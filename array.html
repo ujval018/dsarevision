@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Notes: Arrays & Vectors (A-Z Revision)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        h1, h2, h3 {
+            font-weight: 700;
+            color: #0f172a;
+        }
+        h1 {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+        h2 {
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            margin-top: 2.5rem;
+        }
+        h3 {
+            margin-top: 1.5rem;
+            font-weight: 600;
+        }
+        pre[class*="language-"] {
+            font-family: 'Fira Code', monospace;
+            border-radius: 0.5rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05);
+        }
+        code[class*="language-"] {
+            font-family: 'Fira Code', monospace;
+        }
+        .flashcard {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-top: 1rem;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05);
+        }
+        .flashcard-q {
+            font-weight: 600;
+            color: #475569;
+        }
+        .flashcard-a {
+            margin-top: 0.5rem;
+            color: #334155;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        hr {
+            border-color: #cbd5e1;
+            margin-top: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+        .approach-note {
+            margin-top: 0.5rem;
+            margin-bottom: 0.75rem;
+            font-style: italic;
+            color: #475569;
+            border-left: 3px solid #94a3b8;
+            padding-left: 0.75rem;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="bg-slate-800 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-2xl font-bold text-white hover:text-slate-200 transition">DSA Revision Hub</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-2">
+                        <a href="array.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Arrays</a>
+                        <a href="string.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Strings</a>
+                        <a href="ll.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Linked List</a>
+                        <a href="stack.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Stack</a>
+                        <a href="queue_deque.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Queue/Deque</a>
+                        <a href="tree.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Tree</a>
+                        <a href="heap.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Heap</a>
+                        <a href="hashing.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Hashing</a>
+                        <a href="sorting.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sorting</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container pt-24">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl md:text-5xl font-bold">🔲 Arrays & Vectors: The Complete A-Z Guide</h1>
+        </header>
+
+        <main>
+            <!-- Section 1: Fundamentals -->
+            <section>
+                <h2 class="text-3xl">1. Fundamentals</h2>
+                <h3>Concept</h3>
+                <p class="approach-note">Arrays are the most fundamental data structure, storing elements of the same type in <strong>contiguous memory locations</strong>. This allows for efficient, O(1) random access. C++ `std::vector` is a dynamic array that can grow or shrink in size.</p>
+                <ul class="list-disc list-inside mt-2 space-y-1 pl-2">
+                    <li><strong>Access:</strong> O(1) - Direct access via index.</li>
+                    <li><strong>Search (Unsorted):</strong> O(n) - Linear scan is required.</li>
+                    <li><strong>Search (Sorted):</strong> O(log n) - Binary search can be used.</li>
+                    <li><strong>Insertion/Deletion (at end):</strong> O(1) amortized for vectors.</li>
+                    <li><strong>Insertion/Deletion (at beginning/middle):</strong> O(n) - Requires shifting elements.</li>
+                </ul>
+            </section>
+
+            <hr>
+
+            <!-- Section 2: Core Algorithmic Patterns -->
+            <section>
+                <h2 class="text-3xl">2. Core Algorithmic Patterns</h2>
+                
+                <h3>Two Pointers</h3>
+                <p class="approach-note">This technique uses two pointers to iterate through an array, often from opposite ends or at different speeds, to find a pair or a subsequence. It's highly efficient for problems on sorted arrays.</p>
+<pre><code class="language-cpp">
+// Example: Check for a pair with a given sum in a sorted array
+bool hasPairWithSum(const vector<int>& arr, int sum) {
+    int left = 0;
+    int right = arr.size() - 1;
+    while (left < right) {
+        int currentSum = arr[left] + arr[right];
+        if (currentSum == sum) {
+            return true;
+        } else if (currentSum < sum) {
+            left++; // Need a larger sum
+        } else {
+            right--; // Need a smaller sum
+        }
+    }
+    return false;
+}
+</code></pre>
+
+                <h3>Sliding Window</h3>
+                <p class="approach-note">The sliding window pattern is used to perform an operation on a specific window size of an array. The window "slides" over the data, and the algorithm reuses computation from the previous window to optimize performance from O(n*k) to O(n).</p>
+<pre><code class="language-cpp">
+// Example: Maximum sum of a subarray of size k
+int maxSumSubarray(const vector<int>& arr, int k) {
+    if (arr.size() < k) return -1; // Or throw an error
+    int window_sum = 0;
+    // Calculate sum of the first window
+    for (int i = 0; i < k; i++) {
+        window_sum += arr[i];
+    }
+    int max_sum = window_sum;
+    // Slide the window from left to right
+    for (int i = k; i < arr.size(); i++) {
+        window_sum += arr[i] - arr[i - k]; // Add new element, remove old one
+        max_sum = max(max_sum, window_sum);
+    }
+    return max_sum;
+}
+</code></pre>
+
+                <h3>Prefix Sum</h3>
+                <p class="approach-note">This technique involves creating a prefix sum array where `prefix[i]` stores the sum of all elements from `arr[0]` to `arr[i]`. It allows for calculating the sum of any subarray `[i...j]` in O(1) time after an O(n) preprocessing step.</p>
+<pre><code class="language-cpp">
+// Example: Answering multiple range sum queries
+class NumArray {
+    vector<int> prefix;
+public:
+    NumArray(vector<int>& nums) {
+        prefix.resize(nums.size() + 1, 0);
+        for (int i = 0; i < nums.size(); i++) {
+            prefix[i + 1] = prefix[i] + nums[i];
+        }
+    }
+    // Sum of elements from index left to right, inclusive
+    int sumRange(int left, int right) {
+        return prefix[right + 1] - prefix[left];
+    }
+};
+</code></pre>
+            </section>
+
+            <hr>
+
+            <!-- Section 3: Classic Problems & Techniques -->
+            <section>
+                <h2 class="text-3xl">3. Classic Problems & Techniques</h2>
+
+                <h3>Kadane's Algorithm (Max Subarray Sum)</h3>
+                <p class="approach-note">An efficient O(n) dynamic programming approach to find the contiguous subarray with the largest sum. It maintains a `current_max` and a `global_max`, updating them as it iterates through the array.</p>
+<pre><code class="language-cpp">
+int maxSubArray(vector<int>& nums) {
+    int global_max = nums[0];
+    int current_max = nums[0];
+    for (size_t i = 1; i < nums.size(); i++) {
+        // Decide whether to extend the current subarray or start a new one
+        current_max = max(nums[i], current_max + nums[i]);
+        // Update the overall maximum sum found so far
+        if (current_max > global_max) {
+            global_max = current_max;
+        }
+    }
+    return global_max;
+}
+</code></pre>
+
+                <h3>Dutch National Flag Algorithm (Sort 0s, 1s, 2s)</h3>
+                <p class="approach-note">A single-pass, in-place sorting algorithm that uses three pointers (`low`, `mid`, `high`) to partition an array into three sections: 0s at the beginning, 1s in the middle, and 2s at the end.</p>
+<pre><code class="language-cpp">
+void sortColors(vector<int>& nums) {
+    int low = 0, mid = 0, high = nums.size() - 1;
+    while (mid <= high) {
+        switch (nums[mid]) {
+            case 0:
+                swap(nums[low++], nums[mid++]);
+                break;
+            case 1:
+                mid++;
+                break;
+            case 2:
+                swap(nums[mid], nums[high--]);
+                break;
+        }
+    }
+}
+</code></pre>
+
+                <h3>Moore's Voting Algorithm (Majority Element)</h3>
+                <p class="approach-note">A two-pass O(n) algorithm to find the majority element (appears > n/2 times). The first pass finds a candidate, and the second pass verifies if the candidate is indeed the majority element.</p>
+<pre><code class="language-cpp">
+int majorityElement(vector<int>& nums) {
+    int count = 0;
+    int candidate = 0;
+
+    // Pass 1: Find a candidate
+    for (int num : nums) {
+        if (count == 0) {
+            candidate = num;
+        }
+        count += (num == candidate) ? 1 : -1;
+    }
+
+    // Pass 2 (optional but good practice): Verify the candidate
+    // This is necessary if a majority element might not exist.
+    // count = 0;
+    // for (int num : nums) {
+    //     if (num == candidate) count++;
+    // }
+    // return (count > nums.size() / 2) ? candidate : -1;
+
+    return candidate; // LeetCode problem guarantees a majority element exists
+}
+</code></pre>
+
+                <h3>Rotate Array</h3>
+                <p class="approach-note">An efficient O(n) time and O(1) space method to rotate an array involves three reverse operations. To rotate right by `k`, reverse the whole array, then reverse the first `k` elements, and finally reverse the remaining `n-k` elements.</p>
+<pre><code class="language-cpp">
+void rotate(vector<int>& nums, int k) {
+    int n = nums.size();
+    k = k % n; // Handle cases where k > n
+    if (k == 0) return;
+
+    // Reverse the entire array
+    reverse(nums.begin(), nums.end());
+    // Reverse the first k elements
+    reverse(nums.begin(), nums.begin() + k);
+    // Reverse the remaining n-k elements
+    reverse(nums.begin() + k, nums.end());
+}
+</code></pre>
+            </section>
+
+            <hr>
+
+            <!-- Master Flashcards -->
+            <section>
+                <h2 class="text-3xl">🃏 Master Flashcards for Arrays</h2>
+                <div class="flashcard">
+                    <p class="flashcard-q">Q: What is the time complexity to access an element in an array?</p>
+                    <p class="flashcard-a">A: O(1), due to contiguous memory allocation.</p>
+                </div>
+                <div class="flashcard">
+                    <p class="flashcard-q">Q: When is the Two Pointers technique most effective?</p>
+                    <p class="flashcard-a">A: On sorted arrays, for problems involving finding pairs, triplets, or subsequences with certain properties.</p>
+                </div>
+                <div class="flashcard">
+                    <p class="flashcard-q">Q: How does the Sliding Window pattern optimize brute-force solutions?</p>
+                    <p class="flashcard-a">A: By reusing the computation from the previous window instead of re-calculating for each new window. It slides by adding the next element and removing the first.</p>
+                </div>
+                <div class="flashcard">
+                    <p class="flashcard-q">Q: What is the time complexity of Kadane's algorithm?</p>
+                    <p class="flashcard-a">A: O(n), as it only requires a single pass through the array.</p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center mt-16 border-t pt-8">
+            <p class="text-slate-500">✅ Revision pack complete: Fundamentals, Core Patterns, and Classic Algorithms.</p>
+        </footer>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heap Revision Notes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+    <style>
+        /* Basic Styling & Typography */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* A very light gray */
+            color: #1e293b; /* A dark slate color */
+        }
+        
+        /* Custom styles for syntax highlighting */
+        .token.keyword { color: #be123c; } /* Rose */
+        .token.type { color: #1d4ed8; } /* Blue */
+        .token.function { color: #15803d; } /* Green */
+        .token.comment { color: #94a3b8; } /* Slate */
+        .token.operator { color: #7c2d12; } /* Amber */
+        .token.punctuation { color: #475569; } /* Slate */
+        .token.number { color: #86198f; } /* Fuchsia */
+        .token.string { color: #166534; } /* Green */
+
+        /* Style for the pictorial heap diagrams */
+        .heap-diagram {
+            font-family: 'Fira Code', monospace;
+            background-color: #f1f5f9; /* Lighter slate */
+            color: #334155;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            white-space: pre;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="bg-slate-800 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-2xl font-bold text-white hover:text-slate-200 transition">DSA Revision Hub</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-2">
+                        <a href="array.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Arrays</a>
+                        <a href="string.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Strings</a>
+                        <a href="ll.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Linked List</a>
+                        <a href="stack.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Stack</a>
+                        <a href="queue_deque.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Queue/Deque</a>
+                        <a href="tree.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Tree</a>
+                        <a href="heap.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Heap</a>
+                        <a href="hashing.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Hashing</a>
+                        <a href="sorting.html" class="text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sorting</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 pt-24 pb-12">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-slate-800 tracking-tight">📒 Heap Revision Pack</h1>
+            <p class="mt-4 text-lg text-slate-600">Detailed Notes with Code, Dry Runs, Diagrams & Flashcards</p>
+        </header>
+
+        <main class="space-y-16">
+
+            <!-- Section 1: Min Heap -->
+            <section id="min-heap">
+                <h2 class="text-3xl font-bold text-slate-700 border-b pb-3 mb-6">1. Min Heap (Custom Implementation)</h2>
+                
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-slate-600 mb-3">Concept</h3>
+                        <ul class="list-disc list-inside space-y-2 text-lg text-slate-700">
+                            <li>A <strong>min heap</strong> is a complete binary tree where each parent's value is less than or equal to its children's values.</li>
+                            <li>The <strong>root node</strong> always contains the smallest element in the heap.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-2xl font-semibold text-slate-600 mb-3">Core Functions</h3>
+                        <ul class="list-disc list-inside space-y-2 text-lg text-slate-700">
+                            <li><strong>Insert(x):</strong> Place the new element at the end of the array, then "bubble it up" by repeatedly swapping with its parent until the heap property is restored. Complexity: <strong>O(log n)</strong>.</li>
+                            <li><strong>ExtractMin():</strong> Swap the root with the last element, remove the last element, then "heapify" the root by "bubbling it down" to restore the heap property. Complexity: <strong>O(log n)</strong>.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-2xl font-semibold text-slate-600 mb-3">Code Snippet</h3>
+                        <div class="bg-slate-800 rounded-lg overflow-hidden">
+                            <pre class="p-4 text-sm md:text-base"><code class="language-cpp text-white"><span class="token keyword">struct</span> <span class="token type">minHeap</span> {
+    <span class="token type">vector&lt;int&gt;</span> vec;
+
+    <span class="token type">int</span> <span class="token function">leftchild</span>(<span class="token type">int</span> i) { <span class="token keyword">return</span> <span class="token number">2</span>*i+<span class="token number">1</span>; }
+    <span class="token type">int</span> <span class="token function">rightchild</span>(<span class="token type">int</span> i) { <span class="token keyword">return</span> <span class="token number">2</span>*i+<span class="token number">2</span>; }
+    <span class="token type">int</span> <span class="token function">parent</span>(<span class="token type">int</span> i) { <span class="token keyword">return</span> (i-<span class="token number">1</span>)/<span class="token number">2</span>; }
+
+    <span class="token keyword">void</span> <span class="token function">insert</span>(<span class="token type">int</span> x) {
+        vec.<span class="token function">push_back</span>(x);
+        <span class="token type">int</span> i = vec.<span class="token function">size</span>()-<span class="token number">1</span>;
+        <span class="token keyword">while</span>(i!=<span class="token number">0</span> && vec[i] < vec[<span class="token function">parent</span>(i)]) {
+            <span class="token function">swap</span>(vec[i], vec[<span class="token function">parent</span>(i)]);
+            i = <span class="token function">parent</span>(i);
+        }
+    }
+
+    <span class="token keyword">void</span> <span class="token function">minHeapify</span>(<span class="token type">int</span> i) {
+        <span class="token type">int</span> lt = <span class="token function">leftchild</span>(i), rt = <span class="token function">rightchild</span>(i);
+        <span class="token type">int</span> smallest = i, n = vec.<span class="token function">size</span>();
+        <span class="token keyword">if</span>(lt&lt;n && vec[lt]&lt;vec[smallest]) smallest=lt;
+        <span class="token keyword">if</span>(rt&lt;n && vec[rt]&lt;vec[smallest]) smallest=rt;
+        <span class="token keyword">if</span>(smallest!=i) {
+            <span class="token function">swap</span>(vec[i], vec[smallest]);
+            <span class="token function">minHeapify</span>(smallest);
+        }
+    }
+
+    <span class="token type">int</span> <span class="token function">extractMin</span>() {
+        <span class="token type">int</span> n = vec.<span class="token function">size</span>();
+        <span class="token keyword">if</span>(n==<span class="token number">0</span>) <span class="token keyword">return</span> -<span class="token number">1</span>;
+        <span class="token keyword">if</span>(n==<span class="token number">1</span>) { <span class="token type">int</span> x=vec[<span class="token number">0</span>]; vec.<span class="token function">pop_back</span>(); <span class="token keyword">return</span> x; }
+        <span class="token function">swap</span>(vec[<span class="token number">0</span>], vec[n-<span class="token number">1</span>]);
+        <span class="token type">int</span> x = vec.<span class="token function">back</span>(); vec.<span class="token function">pop_back</span>();
+        <span class="token function">minHeapify</span>(<span class="token number">0</span>);
+        <span class="token keyword">return</span> x;
+    }
+};</code></pre>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-2xl font-semibold text-slate-600 mb-3">Dry Run + Pictorial Diagrams</h3>
+                        <div class="space-y-6">
+                            <h4 class="text-xl font-medium text-slate-600">Insert Sequence: <code class="bg-slate-200 px-2 py-1 rounded">10, 5, 20, 2, 8</code></h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                <div class="p-4 bg-white rounded-lg border"><strong>1. Insert 10</strong><pre class="heap-diagram mt-2">   10</pre></div>
+                                <div class="p-4 bg-white rounded-lg border"><strong>2. Insert 5 → Bubble Up</strong><pre class="heap-diagram mt-2">    5
+   /
+ 10</pre></div>
+                                <div class="p-4 bg-white rounded-lg border"><strong>3. Insert 20</strong><pre class="heap-diagram mt-2">    5
+   / \
+ 10   20</pre></div>
+                                <div class="p-4 bg-white rounded-lg border"><strong>4. Insert 2 → Bubble Up</strong><pre class="heap-diagram mt-2">      2
+     / \
+    5   20
+   /
+ 10</pre></div>
+                                <div class="p-4 bg-white rounded-lg border"><strong>5. Insert 8</strong><pre class="heap-diagram mt-2">      2
+     / \
+    5   20
+   / \
+ 10   8</pre></div>
+                            </div>
+
+                            <h4 class="text-xl font-medium text-slate-600 mt-8">Extract Min (remove 2)</h4>
+                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="p-4 bg-white rounded-lg border"><strong>1. Swap root with last</strong><p class="text-sm text-slate-500">Array becomes [8,5,20,10]</p><pre class="heap-diagram mt-2">      8
+     / \
+    5   20
+   /
+ 10</pre></div>
+                                <div class="p-4 bg-white rounded-lg border"><strong>2. Heapify (8 > 5 → swap)</strong><p class="text-sm text-slate-500">Final heap after extraction</p><pre class="heap-diagram mt-2">      5
+     / \
+    8   20
+   /
+ 10</pre></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-semibold text-slate-600 mb-4">Flashcards</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <div class="p-4 bg-white rounded-lg border shadow-sm"><p class="font-semibold">Q: Where is the smallest element in a min heap?</p><p class="mt-2 text-slate-600">A: At the root.</p></div>
+                            <div class="p-4 bg-white rounded-lg border shadow-sm"><p class="font-semibold">Q: Insert complexity in min heap?</p><p class="mt-2 text-slate-600">A: O(log n).</p></div>
+                            <div class="p-4 bg-white rounded-lg border shadow-sm"><p class="font-semibold">Q: Extract min complexity?</p><p class="mt-2 text-slate-600">A: O(log n).</p></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Max Heap & Heap Sort -->
+            <section id="max-heap">
+                <h2 class="text-3xl font-bold text-slate-700 border-b pb-3 mb-6">2. Max Heap & Heap Sort</h2>
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-slate-600 mb-3">Concept</h3>
+                        <ul class="list-disc list-inside space-y-2 text-lg text-slate-700">
+                            <li>A <strong>max heap</strong> is the opposite of a min heap: each parent's value is greater than or equal to its children's.</li>
+                            <li>The <strong>root</strong> always contains the maximum element.</li>
+                            <li>This property is fundamental to <strong>Heap Sort</strong>.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-2xl font-semibold text-slate-600 mb-3">Code Snippet</h3>
+                        <div class="bg-slate-800 rounded-lg overflow-hidden">
+                            <pre class="p-4 text-sm md:text-base"><code class="language-cpp text-white"><span class="token keyword">void</span> <span class="token function">maxheap</span>(<span class="token type">vector&lt;int&gt;</span>& arr, <span class="token type">int</span> n, <span class="token type">int</span> i) {
+    <span class="token type">int</span> lt = <span class="token number">2</span>*i+<span class="token number">1</span>, rt = <span class="token number">2</span>*i+<span class="token number">2</span>;
+    <span class="token type">int</span> largest = i;
+    <span class="token keyword">if</span>(lt&lt;n && arr[lt]&gt;arr[largest]) largest=lt;
+    <span class="token keyword">if</span>(rt&lt;n && arr[rt]&gt;arr[largest]) largest=rt;
+    <span class="token keyword">if</span>(largest!=i) {
+        <span class="token function">swap</span>(arr[i], arr[largest]);
+        <span class="token function">maxheap</span>(arr,n,largest);
+    }
+}
+
+<span class="token keyword">void</span> <span class="token function">buildHeap</span>(<span class="token type">vector&lt;int&gt;</span>& arr, <span class="token type">int</span> n) {
+    <span class="token keyword">for</span>(<span class="token type">int</span> i=(n-<span class="token number">2</span>)/<span class="token number">2</span>; i&gt;=<span class="token number">0</span>; i--) {
+        <span class="token function">maxheap</span>(arr,n,i);
+    }
+}
+
+<span class="token keyword">void</span> <span class="token function">heapsort</span>(<span class="token type">vector&lt;int&gt;</span>& arr, <span class="token type">int</span> n) {
+    <span class="token function">buildHeap</span>(arr,n);
+    <span class="token keyword">for</span>(<span class="token type">int</span> i=n-<span class="token number">1</span>;i&gt;<span class="token number">0</span>;i--) {
+        <span class="token function">swap</span>(arr[<span class="token number">0</span>], arr[i]);
+        <span class="token function">maxheap</span>(arr,i,<span class="token number">0</span>);
+    }
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-2xl font-semibold text-slate-600 mb-3">Pictorial Example (Build Heap + Heap Sort)</h3>
+                        <p class="mb-4 text-lg">Array: <code class="bg-slate-200 px-2 py-1 rounded">[10, 20, 15, 30, 40]</code></p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="text-xl font-medium text-slate-600">Step 1: Build Max Heap</h4>
+                                <pre class="heap-diagram mt-2">      40
+     /  \
+    30   15
+   / \
+  10  20</pre>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-medium text-slate-600">Step 2: Heap Sort</h4>
+                                <ul class="list-decimal list-inside mt-2 space-y-1 text-slate-700">
+                                    <li>Swap root(40) with last(20) → heapify → <code class="text-sm">[30,20,15,10,40]</code></li>
+                                    <li>Swap root(30) with 10 → heapify → <code class="text-sm">[20,10,15,30,40]</code></li>
+                                    <li>Swap root(20) with 15 → heapify → <code class="text-sm">[15,10,20,30,40]</code></li>
+                                    <li>Swap root(15) with 10 → heapify → <code class="text-sm">[10,15,20,30,40]</code></li>
+                                </ul>
+                                <p class="mt-4 font-semibold">Sorted array: <code class="bg-green-100 text-green-800 px-2 py-1 rounded">[10, 15, 20, 30, 40]</code></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                     <div>
+                        <h3 class="text-2xl font-semibold text-slate-600 mb-4">Flashcards</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <div class="p-4 bg-white rounded-lg border shadow-sm"><p class="font-semibold">Q: Complexity of build heap?</p><p class="mt-2 text-slate-600">A: O(n).</p></div>
+                            <div class="p-4 bg-white rounded-lg border shadow-sm"><p class="font-semibold">Q: Heap sort complexity?</p><p class="mt-2 text-slate-600">A: O(n log n).</p></div>
+                            <div class="p-4 bg-white rounded-lg border shadow-sm"><p class="font-semibold">Q: Is heap sort stable?</p><p class="mt-2 text-slate-600">A: No.</p></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Applications -->
+            <section id="applications">
+                <h2 class="text-3xl font-bold text-slate-700 border-b pb-3 mb-6">3. Applications of Heaps</h2>
+                <div class="space-y-12">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-slate-600 mb-3">(a) Buy Max Items within Budget</h3>
+                        <p class="mb-4 text-lg text-slate-700">👉 <strong>Greedy approach:</strong> Always pick the cheapest item first. A min heap is perfect for this.</p>
+                        <p class="mb-4"><strong>Example:</strong> <code class="bg-slate-200 px-2 py-1 rounded">arr=[1,12,5,111,200]</code>, sum=10 → buy <code class="bg-slate-200 px-2 py-1 rounded">[1,5]</code> → 2 items.</p>
+                        <div class="bg-slate-800 rounded-lg overflow-hidden">
+                            <pre class="p-4 text-sm md:text-base"><code class="language-cpp text-white"><span class="token type">int</span> <span class="token function">pickitem</span>(<span class="token type">vector&lt;int&gt;</span>& arr, <span class="token type">int</span> sum) {
+    <span class="token type">priority_queue&lt;int,vector&lt;int&gt;,greater&lt;int&gt;&gt;</span> pq(arr.<span class="token function">begin</span>(), arr.<span class="token function">end</span>());
+    <span class="token type">int</span> res=<span class="token number">0</span>;
+    <span class="token keyword">while</span>(!pq.<span class="token function">empty</span>() && sum&gt;=pq.<span class="token function">top</span>()) {
+        sum -= pq.<span class="token function">top</span>();
+        pq.<span class="token function">pop</span>();
+        res++;
+    }
+    <span class="token keyword">return</span> res;
+}</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-semibold text-slate-600 mb-3">(b) Find K Largest Elements</h3>
+                        <p class="mb-4 text-lg text-slate-700">👉 Maintain a min heap of size K. If a new element is larger than the smallest in the heap (the root), replace it.</p>
+                         <p class="mb-4"><strong>Example:</strong> <code class="bg-slate-200 px-2 py-1 rounded">arr=[3,10,5,20,100,80], k=3</code> → <code class="bg-slate-200 px-2 py-1 rounded">[20,80,100]</code></p>
+                        <div class="bg-slate-800 rounded-lg overflow-hidden">
+                            <pre class="p-4 text-sm md:text-base"><code class="language-cpp text-white"><span class="token type">vector&lt;int&gt;</span> <span class="token function">klarge</span>(<span class="token type">vector&lt;int&gt;</span>& arr, <span class="token type">int</span> k) {
+    <span class="token type">priority_queue&lt;int,vector&lt;int&gt;,greater&lt;int&gt;&gt;</span> pq;
+    <span class="token keyword">for</span>(<span class="token type">int</span> i=<span class="token number">0</span>;i&lt;k;i++) pq.<span class="token function">push</span>(arr[i]);
+    <span class="token keyword">for</span>(<span class="token type">int</span> i=k;i&lt;arr.<span class="token function">size</span>();i++) {
+        <span class="token keyword">if</span>(arr[i]&gt;pq.<span class="token function">top</span>()) {
+            pq.<span class="token function">pop</span>(); pq.<span class="token function">push</span>(arr[i]);
+        }
+    }
+    <span class="token type">vector&lt;int&gt;</span> res;
+    <span class="token keyword">while</span>(!pq.<span class="token function">empty</span>()) { res.<span class="token function">push_back</span>(pq.<span class="token function">top</span>()); pq.<span class="token function">pop</span>(); }
+    <span class="token keyword">return</span> res;
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-2xl font-semibold text-slate-600 mb-3">(c) Sort K-Sorted Array</h3>
+                        <p class="mb-4 text-lg text-slate-700">👉 An array is "k-sorted" if each element is at most k positions away from its sorted position. Use a min heap of size k+1 to sort it efficiently.</p>
+                        <p class="mb-4"><strong>Example:</strong> Input: <code class="bg-slate-200 px-2 py-1 rounded">[6,5,3,2,8,10,9], k=3</code> → Output: <code class="bg-slate-200 px-2 py-1 rounded">[2,3,5,6,8,9,10]</code></p>
+                        <div class="bg-slate-800 rounded-lg overflow-hidden">
+                            <pre class="p-4 text-sm md:text-base"><code class="language-cpp text-white"><span class="token keyword">void</span> <span class="token function">sortK</span>(<span class="token type">vector&lt;int&gt;</span>& arr, <span class="token type">int</span> k) {
+    <span class="token type">priority_queue&lt;int,vector&lt;int&gt;,greater&lt;int&gt;&gt;</span> pq;
+    <span class="token keyword">for</span>(<span class="token type">int</span> i=<span class="token number">0</span>;i&lt;=k;i++) pq.<span class="token function">push</span>(arr[i]);
+    <span class="token type">int</span> idx=<span class="token number">0</span>;
+    <span class="token keyword">for</span>(<span class="token type">int</span> i=k+<span class="token number">1</span>;i&lt;arr.<span class="token function">size</span>();i++) {
+        arr[idx++]=pq.<span class="token function">top</span>(); pq.<span class="token function">pop</span>();
+        pq.<span class="token function">push</span>(arr[i]);
+    }
+    <span class="token keyword">while</span>(!pq.<span class="token function">empty</span>()) { arr[idx++]=pq.<span class="token function">top</span>(); pq.<span class="token function">pop</span>(); }
+}</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-semibold text-slate-600 mb-4">Flashcards</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <div class="p-4 bg-white rounded-lg border shadow-sm"><p class="font-semibold">Q: How to get k largest elements efficiently?</p><p class="mt-2 text-slate-600">A: Min heap of size k.</p></div>
+                            <div class="p-4 bg-white rounded-lg border shadow-sm"><p class="font-semibold">Q: Sorting k-sorted array complexity?</p><p class="mt-2 text-slate-600">A: O(n log k).</p></div>
+                            <div class="p-4 bg-white rounded-lg border shadow-sm"><p class="font-semibold">Q: Which heap for buying items with budget?</p><p class="mt-2 text-slate-600">A: Min heap.</p></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center mt-16 border-t pt-8">
+            <p class="text-slate-500">✅ Revision pack complete: Concepts, Code, Diagrams, and Applications.</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
